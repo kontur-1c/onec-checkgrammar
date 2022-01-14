@@ -1,0 +1,12 @@
+variables:
+  NEXUS_USER: $DOCKER_REGISTRY_USERNAME
+  NEXUS_PASSWORD: $DOCKER_REGISTRY_PASSWORD
+  PY_TESTS_DIR: "./tests"
+  MYPY_ALLOW_FAILURE: "true"
+
+
+include:
+  - project: 'python-libs/gitlab-ci-templates'
+    file: 'libs/.gitlab-ci.yml'
+
+
