@@ -7,7 +7,7 @@ package_version = os.environ.get("CI_COMMIT_TAG") or "0.dev0"
 with open("README.md", "r", encoding="utf-8") as readme:
     long_description = readme.read()
 
-title = "kontur-retail1c-grammarnazi"
+title = "kontur-retail1c-onec-checkgrammar"
 author = "1c_infra_dev"
 email = "1c_infra_dev-aaaabcxg5jguh2uhywkaqukgp4@kontur.slack.com"
 url = "https://git.skbkontur.ru/edi1c/grammarnazi"
