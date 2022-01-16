@@ -7,12 +7,12 @@ package_version = os.environ.get("CI_COMMIT_TAG") or "0.dev0"
 with open("README.md", "r", encoding="utf-8") as readme:
     long_description = readme.read()
 
-title = "kontur-retail1c-onec-checkgrammar"
-author = "1c_infra_dev"
-email = "1c_infra_dev-aaaabcxg5jguh2uhywkaqukgp4@kontur.slack.com"
+title = "kontur-retail1c-checkgrammar"
+author = "a.krapivin"
+email = "a.krapivin@kontur.ru"
 url = "https://git.skbkontur.ru/edi1c/grammarnazi"
 
-requires = ["pyspeller=0.2.0"]
+requires = ["pyaspeller", "deeppavlov", "Click"]
 requires_dev = ["black", "pytest", "pytest-cov", "pytest-runner"]
 
 setup(
@@ -27,6 +27,11 @@ setup(
     tests_require=requires_dev,
     url=url,
     packages=find_namespace_packages(include=["kontur.*"]),
+    entry_points={
+        "console_scripts":[
+            "checkgrammar=kontur.checkgrammar.scripts.cli:cli"
+]
+    },
     include_package_data=True,
     author=author,
     author_email=email,
