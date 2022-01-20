@@ -1,0 +1,86 @@
+import os
+from xml.etree import ElementTree as Et
+
+namespaces = {
+    "logform": "http://v8.1c.ru/8.3/xcf/logform",
+    "core": "http://v8.1c.ru/8.1/data/core",
+}
+
+
+def getRuContent(obj: Et.Element):
+    """
+    Получает русское наименование элемента
+        :param obj: Параметр элемента формы: Заголовок, Подсказка, Расширенная подсказка
+        :return: Строку или None если не нашел
+    """
+    if obj is None:
+        return None
+    elements = obj.findall("core:item", namespaces)
+    for element in elements:
+        lang = element.find("core:lang", namespaces).text
+        if lang != "ru":
+            continue
+        content = element.find("core:content", namespaces).text
+        return content
+
+
+def getChildItems(obj: Et.Element) -> dict:
+    """
+    Перебирает подчиненные элементы: кнопки, надписи, поля ввода и тд. Выделяет их заголовок, подсказку или
+    расширенную подсказку. Рекурсивно вызывает обработку вложенных элементов.
+    Например: Страница(Заголовок) - Командная панель - Кнопки(Заголовок, Подсказки)
+        :param obj: Элемент формы
+        :return: Словарь НазваниеЭлемента.Поле - Текст
+    """
+    result = {}
+    if obj is None:
+        return result
+    all_elements = obj.find("logform:ChildItems", namespaces)
+    if all_elements is None:
+        return result
+    for element in all_elements:
+        name = element.attrib.get("name")
+
+        title = element.find("logform:Title", namespaces)
+        content = getRuContent(title)
+        if content is not None:
+            result[f"{name}.Заголовок"] = content
+
+        tooltip = element.find("logform:ToolTip", namespaces)
+        content = getRuContent(tooltip)
+        if content is not None:
+            result[f"{name}.Подсказка"] = content
+
+        ext_tooltip = element.find("logform:ExtendedTooltip/logform:Title", namespaces)
+        content = getRuContent(ext_tooltip)
+        if content is not None:
+            result[f"{name}.РасшПодсказка"] = content
+
+        result.update(getChildItems(element))
+    return result
+
+
+def parseForm(path_to_form: str):
+    """
+Разбор формы на элементы
+        :param path_to_form: путь до файла формы
+        :return: dict с элеметами формы и их текстами
+    """
+    form = Et.parse(path_to_form).getroot()
+
+    bar = form.find('logform:AutoCommandBar', namespaces)
+    buttons = getChildItems(bar)
+
+    elements = getChildItems(form)
+
+    return dict(elements, **buttons)
+
+
+def parseScr(path_to_src):
+    """
+Разбор каталога исходников на формы и элементы
+    :param path_to_src: путь до каталога исходников
+    :return: dict с формами и элементами
+    """
+
+
