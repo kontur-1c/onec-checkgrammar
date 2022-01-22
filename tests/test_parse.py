@@ -152,3 +152,11 @@ def test_parseForm():
     for key in must_be:
 
         assert key in result
+
+
+def test_parseSrc():
+    path = os.path.abspath("fixture/epf/")
+    result = parse.parseSrc(path)
+
+    assert result
+    assert "ТестоваяОбработка.Форма" in result

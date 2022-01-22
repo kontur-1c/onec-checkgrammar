@@ -1,0 +1,39 @@
+{
+    "$schema": "https://1c-syntax.github.io/bsl-language-server/configuration/schema.json",
+    "language": "ru",
+    "diagnostics": {
+        "computeTrigger": "onSave",
+        "parameters": {
+            "Typo": {
+                "userWordsToIgnore": "Логгер,Распарсить,Синх,Обяз",
+                "minWordLength": 3
+            },
+            "UsingServiceTag": {
+                "serviceTags": "todo"
+            },
+            "LineLength": {
+                "maxLineLength": 120
+            },
+            "MissingSpace": {
+                "allowMultipleCommas": true
+            },
+            "NumberOfOptionalParams": {
+                "maxOptionalParamsCount": 100
+            },
+            "NumberOfParams": {
+                "maxParamsCount": 100
+            },
+            "LatinAndCyrillicSymbolInWord": false,
+            "ExportVariables": false,
+            "FormDataToValue": false,
+            "UsingThisForm": false,
+            "NonStandardRegion": false,
+            "FunctionNameStartsWithGet": false,
+            "DeprecatedCurrentDate": false,
+            "GetFormMethod": false,
+            "NestedFunctionInParameters": false,
+            "DeprecatedFind": false,
+            "MethodSize": false
+        }
+    }
+}

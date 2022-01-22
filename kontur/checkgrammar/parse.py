@@ -1,4 +1,5 @@
 import os
+import glob
 from xml.etree import ElementTree as Et
 
 namespaces = {
@@ -76,11 +77,20 @@ def parseForm(path_to_form: str):
     return dict(elements, **buttons)
 
 
-def parseScr(path_to_src):
+def parseSrc(path_to_src):
     """
 Разбор каталога исходников на формы и элементы
     :param path_to_src: путь до каталога исходников
     :return: dict с формами и элементами
     """
+    full_path = os.path.abspath(path_to_src)
+    files = glob.glob(f"{full_path}/**/Forms/*/Ext/Form.xml")
+    result = {}
+    for form_file in files:
+        temp = form_file.split("\\")
+        object = temp[-5]
+        form = temp[-3]
+        result[f"{object}.{form}"] = parseForm(form_file)
 
+    return result
 
