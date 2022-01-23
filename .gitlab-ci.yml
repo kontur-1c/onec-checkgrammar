@@ -4,3 +4,34 @@ include:
 
 variables:
   MYPY_ALLOW_FAILURE: "true"
+
+release:
+  stage: build-and-push
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  tags: [docker-build]
+  only: [tags]
+  script:
+    # Проверка файла
+    - CHANGELOG_FILE=CHANGELOG.md
+    - >
+      if ! [ -f $CHANGELOG_FILE ]; then 
+        echo "\$CHANGELOG_FILE=$CHANGELOG_FILE not found"; 
+        exit 1;
+      fi;
+    # CRLF
+    - >
+      if ! awk '/\r$/ { exit(1) }' "$CHANGELOG_FILE" ; then
+        sed 's/.$//' "$CHANGELOG_FILE" > "$CHANGELOG_FILE.tmp"
+        CHANGELOG_FILE="$CHANGELOG_FILE.tmp"
+      fi
+    # CHANGELOG
+    - CHANGELOG=$(awk -v RS='\n' -v tag="${CI_COMMIT_TAG}" '/^### / { if (p) { exit }; if ($2 == tag) { p=1; next} } p && NF' "$CHANGELOG_FILE" | sed 's|\r |\n|g')
+    - >
+      if [ -z "$CHANGELOG" ]; then 
+        echo "\$CHANGELOG=$CHANGELOG is empty"; exit 1; 
+      fi;
+    - >
+      release-cli create --name "version: $CI_COMMIT_TAG" 
+      --description "$CHANGELOG" 
+      --tag-name "$CI_COMMIT_TAG" 
+      --ref "$CI_COMMIT_SHA"

@@ -4,6 +4,7 @@ import os
 from junit_xml import TestCase, TestSuite
 from pyaspeller import YandexSpeller
 from wasabi import Printer
+from functools import lru_cache
 
 from kontur.checkgrammar import parse
 
@@ -14,8 +15,6 @@ class GrammarCheck:
         self._src = []
         self._dict = []
         self._result = None
-
-        self.__speller = YandexSpeller(lang="ru", ignore_urls=True, ignore_latin=True)
 
     def update_dict_from_file(self, path_to_dict: str):
         """
@@ -36,7 +35,9 @@ class GrammarCheck:
                 :param bsl_settings: путь до настроек .bsl-language-server.json
         """
         full_path = os.path.abspath(bsl_settings)
-        assert os.path.exists(full_path), f"Не найдены настройки bsl language server {full_path}"
+        assert os.path.exists(
+            full_path
+        ), f"Не найдены настройки bsl language server {full_path}"
 
         with open(full_path, "r", encoding="utf-8") as json_file:
             data = json.load(json_file)
@@ -63,12 +64,17 @@ class GrammarCheck:
         full_path = os.path.abspath(src)
         assert os.path.exists(full_path), f"Не найден каталог исходников {full_path}"
 
-        self._src.append(full_path)
+        self._src.append(src)
 
     def checkYaSpeller(self, text_for_check) -> list:
+        @lru_cache(maxsize=128)
+        def speller(text):
+            ya_speller = YandexSpeller(lang="ru", ignore_urls=True, ignore_latin=True)
+            return ya_speller.spell(text_for_check)
+
         result = []
         # find those words that may be misspelled
-        check = self.__speller.spell(text_for_check)
+        check = speller(text_for_check)
         for res in check:
             if (
                 res["s"] and res["word"].lower() not in self._dict
@@ -86,14 +92,17 @@ class GrammarCheck:
             objects = parse.parseSrc(src)
 
             for obj, elements in objects.items():
-
+                if len(self._src) == 1:
+                    key = obj
+                else:
+                    key = f"{src}->{obj}"
                 for element, text in elements.items():
                     errors = self.checkYaSpeller(text)
 
                     if errors:
                         if obj not in result:
-                            result[obj] = {}
-                        result[obj].update({element: errors})
+                            result[key] = {}
+                        result[key].update({element: errors})
 
         self._result = result
 
