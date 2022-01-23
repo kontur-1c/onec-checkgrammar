@@ -8,19 +8,7 @@
 	</Title>
 	<AutoTitle>false</AutoTitle>
 	<AutoCommandBar name="ФормаКоманднаяПанель" id="-1">
-		<ChildItems>
-			<Button name="КнопкаКоманднойПанели" id="1">
-				<Type>CommandBarButton</Type>
-				<CommandName>Form.Command.Бум</CommandName>
-				<Title>
-					<v8:item>
-						<v8:lang>ru</v8:lang>
-						<v8:content>Бум</v8:content>
-					</v8:item>
-				</Title>
-				<ExtendedTooltip name="КнопкаКоманднойПанелиРасширеннаяПодсказка" id="2"/>
-			</Button>
-		</ChildItems>
+		<Autofill>false</Autofill>
 	</AutoCommandBar>
 	<ChildItems>
 		<Pages name="ГруппаСтраниц" id="3">

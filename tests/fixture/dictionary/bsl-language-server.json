@@ -5,7 +5,7 @@
         "computeTrigger": "onSave",
         "parameters": {
             "Typo": {
-                "userWordsToIgnore": "Логгер,Распарсить,Синх,Обяз",
+                "userWordsToIgnore": "Логгер,Распарсить,Синх,Обяз,палями",
                 "minWordLength": 3
             },
             "UsingServiceTag": {

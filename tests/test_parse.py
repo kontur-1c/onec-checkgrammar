@@ -100,7 +100,7 @@ def test_ChildItemsExtendedTooltip(button):
 # endregion
 
 
-def test_parseForm():
+def test_parseFormWithAutoCommandBar():
     path = os.path.abspath(
         "tests/fixture/epf_mistakes/ТестоваяОбработка/Forms/Форма/Ext/Form.xml"
     )
@@ -109,6 +109,31 @@ def test_parseForm():
     assert result
     must_be = [
         "КнопкаКоманднойПанели.Заголовок",
+        "ГруппаСДекорациями.Заголовок",
+        "ГраппаСПолями.Заголовок",
+        "ГруппаСКнопками.Заголовок",
+        "Надпись.Заголовок",
+        "Картинка.Заголовок",
+        "Реквизит1.Заголовок",
+        "Реквизит2.Заголовок",
+        "Команда1.Заголовок",
+        "Флаг.Заголовок",
+        "Флаг.Подсказка",
+        "Флаг.РасшПодсказка",
+    ]
+    for key in must_be:
+
+        assert key in result
+
+
+def test_parseFormWithoutAutoCommandBar():
+    path = os.path.abspath(
+        "tests/fixture/epf_right/ТестоваяОбработка/Forms/Форма/Ext/Form.xml"
+    )
+    result = parse.parseForm(path)
+
+    assert result
+    must_be = [
         "ГруппаСДекорациями.Заголовок",
         "ГраппаСПолями.Заголовок",
         "ГруппаСКнопками.Заголовок",
