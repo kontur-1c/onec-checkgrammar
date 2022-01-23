@@ -8,37 +8,7 @@ from kontur.checkgrammar import parse
 
 @pytest.fixture
 def button():
-    data = """<?xml version="1.0"?>
-        <ButtonGroup xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns="http://v8.1c.ru/8.3/xcf/logform" name="ГруппаТест" id="1249">
-            <ChildItems>
-                <Button name="Тест" id="65">
-                    <Type>CommandBarButton</Type>
-                    <CommandName>Form.Command.Тест</CommandName>
-                    <Title>
-                        <v8:item>
-                            <v8:lang>ru</v8:lang>
-                            <v8:content>Тестовая кнопка</v8:content>
-                        </v8:item>
-                    </Title>
-                    <ToolTip>
-                        <v8:item>
-                            <v8:lang>ru</v8:lang>
-                            <v8:content>Это тестовая подсказка</v8:content>
-                        </v8:item>
-                    </ToolTip>
-                    <ExtendedTooltip name="ТестоваяПодсказка" id="1255">
-                        <Title formatted="false">
-                            <v8:item>
-                                <v8:lang>ru</v8:lang>
-                                <v8:content>Это тестовая расширенная подсказка</v8:content>
-                            </v8:item>
-                        </Title>
-                    </ExtendedTooltip>
-                </Button>
-            </ChildItems>
-        </ButtonGroup>
-        """
-    obj = ET.fromstring(data)
+    obj = ET.parse('tests/fixture/button.xml')
     return obj
 
 
@@ -131,7 +101,9 @@ def test_ChildItemsExtendedTooltip(button):
 
 
 def test_parseForm():
-    path = os.path.abspath("fixture/epf/ТестоваяОбработка/Forms/Форма/Ext/Form.xml")
+    path = os.path.abspath(
+        "tests/fixture/epf_mistakes/ТестоваяОбработка/Forms/Форма/Ext/Form.xml"
+    )
     result = parse.parseForm(path)
 
     assert result
@@ -155,7 +127,7 @@ def test_parseForm():
 
 
 def test_parseSrc():
-    path = os.path.abspath("fixture/epf/")
+    path = os.path.abspath("tests/fixture/epf_mistakes/")
     result = parse.parseSrc(path)
 
     assert result

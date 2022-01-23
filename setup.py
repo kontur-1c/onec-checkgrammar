@@ -14,7 +14,7 @@ url = "https://git.skbkontur.ru/edi1c/grammarnazi"
 
 requires = ["pyaspeller", "Click", "junit-xml==1.9", "wasabi"]
 requires_test = ["pytest", "pytest-cov", "pytest-runner"]
-requires_dev = requires_test + ["black", "flake8", "kontur-pie"]
+requires_dev = requires_test + ["black", "flake8"]
 
 setup(
     name=title,
@@ -29,7 +29,7 @@ setup(
     url=url,
     packages=find_namespace_packages(include=["kontur.*"]),
     entry_points={
-        "console_scripts": ["checkgrammar=kontur.checkgrammar.scripts.cli:cli"]
+        "console_scripts": ["checkgrammar=kontur.checkgrammar.cli:cli"]
     },
     include_package_data=True,
     author=author,
