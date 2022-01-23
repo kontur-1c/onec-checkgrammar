@@ -92,7 +92,7 @@ def parseSrc(path_to_src) -> Dict[str, Dict[str, str]]:
         :return: dict с формами и элементами
     """
     full_path = os.path.abspath(path_to_src)
-    files = glob.glob(f"{full_path}/**/Forms/*/Ext/Form.xml")
+    files = glob.glob(f"{full_path}/**/Forms/*/Ext/Form.xml", recursive=True)
     result: Dict[str, Dict[str, str]] = {}
     for form_file in files:
         temp = form_file.split(os.path.sep)

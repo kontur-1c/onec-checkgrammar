@@ -97,7 +97,8 @@ class GrammarCheck:
                 else:
                     key = f"{src}->{obj}"
                 for element, text in elements.items():
-                    errors = self.checkYaSpeller(text)
+                    if len(text) >= 3:
+                        errors = self.checkYaSpeller(text)
 
                     if errors:
                         if obj not in result:
