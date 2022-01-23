@@ -9,10 +9,26 @@ else:
 
 
 def dump():
-    with pie.ib.TempIB() as ib:
-        pie.dump_epf(epf = 'tests/fixture/epf/ТестоваяОбработка.epf', epf_xml = 'tests/fixture/epf/ТестоваяОбработка.xml')
+    with pie.ib.TempIB():
+        pie.dump_epf(
+            epf="tests/fixture/epf_mistakes/ТестоваяОбработка.epf",
+            epf_xml="tests/fixture/epf_mistakes/ТестоваяОбработка.xml",
+        )
+
+        pie.dump_epf(
+            epf="tests/fixture/epf_right/ТестоваяОбработка.epf",
+            epf_xml="tests/fixture/epf_right/ТестоваяОбработка.xml",
+        )
 
 
 def build():
-    with pie.ib.TempIB() as ib:
-        pie.build_epf('tests/fixture/epf/ТестоваяОбработка.epf', 'tests/fixture/epf/ТестоваяОбработка.xml')
+    with pie.ib.TempIB():
+        pie.build_epf(
+            "tests/fixture/epf_mistakes/ТестоваяОбработка.epf",
+            "tests/fixture/epf_mistakes/ТестоваяОбработка.xml",
+        )
+
+        pie.build_epf(
+            "tests/fixture/epf_right/ТестоваяОбработка.epf",
+            "tests/fixture/epf_right/ТестоваяОбработка.xml",
+        )

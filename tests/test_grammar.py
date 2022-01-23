@@ -12,8 +12,8 @@ def temp_xml(tmpdir_factory):
 @pytest.fixture
 def check():
     check = GrammarCheck()
-    check.update_dict_from_file("fixture/dictionary/dict.txt")
-    check.add_src("fixture/epf/")
+    check.update_dict_from_file("tests/fixture/dictionary/dict.txt")
+    check.add_src("tests/fixture/epf_mistakes/")
 
     check.run()
 
@@ -22,21 +22,21 @@ def check():
 
 def test_update_dict_from_file():
     check = GrammarCheck()
-    check.update_dict_from_file("fixture/dictionary/dict.txt")
+    check.update_dict_from_file("tests/fixture/dictionary/dict.txt")
 
     assert len(check._dict) == 3, "Некорректно разобран словарь из файла"
 
 
 def test_update_dict_from_bsl():
     check = GrammarCheck()
-    check.update_dict_from_bsl("fixture/dictionary/bsl-language-server.json")
+    check.update_dict_from_bsl("tests/fixture/dictionary/bsl-language-server.json")
 
     assert len(check._dict) == 4, "Некорректно разобран словарь из файла"
 
 
 def test_add_src():
     check = GrammarCheck()
-    check.add_src("fixture/epf/")
+    check.add_src("tests/fixture/epf_mistakes/")
 
     assert len(check._src) == 1, "Не удалось добавить каталог исходников"
 
@@ -57,7 +57,7 @@ def test_check_ya_speller_no_error():
 
 def test_check_ya_speller_no_error_with_dict():
     check = GrammarCheck()
-    check.update_dict_from_file("fixture/dictionary/dict.txt")
+    check.update_dict_from_file("tests/fixture/dictionary/dict.txt")
     result = check.checkYaSpeller("КоНрТаГеНт  ")
 
     assert not result, "Найдены ошибки"

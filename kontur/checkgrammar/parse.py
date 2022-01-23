@@ -1,6 +1,7 @@
 import os
 import glob
 from xml.etree import ElementTree as Et
+from typing import Dict, Union
 
 namespaces = {
     "logform": "http://v8.1c.ru/8.3/xcf/logform",
@@ -8,7 +9,7 @@ namespaces = {
 }
 
 
-def getRuContent(obj: Et.Element):
+def getRuContent(obj: Et.Element) -> Union[str, None]:
     """
     Получает русское наименование элемента
         :param obj: Параметр элемента формы: Заголовок, Подсказка, Расширенная подсказка
@@ -18,14 +19,16 @@ def getRuContent(obj: Et.Element):
         return None
     elements = obj.findall("core:item", namespaces)
     for element in elements:
-        lang = element.find("core:lang", namespaces).text
-        if lang != "ru":
-            continue
-        content = element.find("core:content", namespaces).text
-        return content
+        lang = element.find("core:lang", namespaces)
+        if lang is not None and lang.text == "ru":
+            content = element.find("core:content", namespaces)
+            if content is not None:
+                return content.text
+
+    return None
 
 
-def getChildItems(obj: Et.Element) -> dict:
+def getChildItems(obj: Et.Element) -> Dict[str, str]:
     """
     Перебирает подчиненные элементы: кнопки, надписи, поля ввода и тд. Выделяет их заголовок, подсказку или
     расширенную подсказку. Рекурсивно вызывает обработку вложенных элементов.
@@ -33,7 +36,7 @@ def getChildItems(obj: Et.Element) -> dict:
         :param obj: Элемент формы
         :return: Словарь НазваниеЭлемента.Поле - Текст
     """
-    result = {}
+    result: Dict[str, str] = {}
     if obj is None:
         return result
     all_elements = obj.find("logform:ChildItems", namespaces)
@@ -43,54 +46,58 @@ def getChildItems(obj: Et.Element) -> dict:
         name = element.attrib.get("name")
 
         title = element.find("logform:Title", namespaces)
-        content = getRuContent(title)
-        if content is not None:
-            result[f"{name}.Заголовок"] = content
+        if title is not None:
+            content = getRuContent(title)
+            if content is not None:
+                result[f"{name}.Заголовок"] = content
 
         tooltip = element.find("logform:ToolTip", namespaces)
-        content = getRuContent(tooltip)
-        if content is not None:
-            result[f"{name}.Подсказка"] = content
+        if tooltip is not None:
+            content = getRuContent(tooltip)
+            if content is not None:
+                result[f"{name}.Подсказка"] = content
 
         ext_tooltip = element.find("logform:ExtendedTooltip/logform:Title", namespaces)
-        content = getRuContent(ext_tooltip)
-        if content is not None:
-            result[f"{name}.РасшПодсказка"] = content
+        if ext_tooltip is not None:
+            content = getRuContent(ext_tooltip)
+            if content is not None:
+                result[f"{name}.РасшПодсказка"] = content
 
         result.update(getChildItems(element))
     return result
 
 
-def parseForm(path_to_form: str):
+def parseForm(path_to_form: str) -> Dict[str, str]:
     """
-Разбор формы на элементы
-        :param path_to_form: путь до файла формы
-        :return: dict с элеметами формы и их текстами
+    Разбор формы на элементы
+            :param path_to_form: путь до файла формы
+            :return: dict с элеметами формы и их текстами
     """
     form = Et.parse(path_to_form).getroot()
 
-    bar = form.find('logform:AutoCommandBar', namespaces)
-    buttons = getChildItems(bar)
+    bar = form.find("logform:AutoCommandBar", namespaces)
+    buttons: Dict[str, str] = {}
+    if bar is not None:
+        buttons = getChildItems(bar)
 
     elements = getChildItems(form)
 
     return dict(elements, **buttons)
 
 
-def parseSrc(path_to_src):
+def parseSrc(path_to_src) -> Dict[str, Dict[str, str]]:
     """
-Разбор каталога исходников на формы и элементы
-    :param path_to_src: путь до каталога исходников
-    :return: dict с формами и элементами
+    Разбор каталога исходников на формы и элементы
+        :param path_to_src: путь до каталога исходников
+        :return: dict с формами и элементами
     """
     full_path = os.path.abspath(path_to_src)
     files = glob.glob(f"{full_path}/**/Forms/*/Ext/Form.xml")
-    result = {}
+    result: Dict[str, Dict[str, str]] = {}
     for form_file in files:
-        temp = form_file.split("\\")
-        object = temp[-5]
+        temp = form_file.split(os.path.sep)
+        obj = temp[-5]
         form = temp[-3]
-        result[f"{object}.{form}"] = parseForm(form_file)
+        result[f"{obj}.{form}"] = parseForm(form_file)
 
     return result
-

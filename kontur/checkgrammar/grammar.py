@@ -1,6 +1,5 @@
 import json
 import os
-import warnings
 
 from junit_xml import TestCase, TestSuite
 from pyaspeller import YandexSpeller
@@ -24,7 +23,7 @@ class GrammarCheck:
                         :param path_to_dict: путь до файла со словарем
         """
         full_path = os.path.abspath(path_to_dict)
-        assert os.path.exists(full_path), "Не найден словарь"
+        assert os.path.exists(full_path), f"Не найден словарь {full_path}"
 
         with open(path_to_dict, "r", encoding="utf-8") as f:
             our_dict = [x.strip().lower() for x in f.readlines()]
@@ -37,7 +36,7 @@ class GrammarCheck:
                 :param bsl_settings: путь до настроек .bsl-language-server.json
         """
         full_path = os.path.abspath(bsl_settings)
-        assert os.path.exists(full_path), "Не найдены настройки bsl language server"
+        assert os.path.exists(full_path), f"Не найдены настройки bsl language server {full_path}"
 
         with open(full_path, "r", encoding="utf-8") as json_file:
             data = json.load(json_file)
@@ -61,10 +60,10 @@ class GrammarCheck:
         Добавить каталог с исходниками для обработки
                 :param src: путь до каталога исходников
         """
-        path_to_src = os.path.abspath(src)
-        assert os.path.exists(path_to_src)
+        full_path = os.path.abspath(src)
+        assert os.path.exists(full_path), f"Не найден каталог исходников {full_path}"
 
-        self._src.append(path_to_src)
+        self._src.append(full_path)
 
     def checkYaSpeller(self, text_for_check) -> list:
         result = []
@@ -81,8 +80,6 @@ class GrammarCheck:
     def run(self):
 
         assert self._src, "Не указаны каталоги для проверки"
-        if not self._dict:
-            warnings.warn("Словарь исключений пустой")
 
         result = {}
         for src in self._src:
@@ -135,3 +132,10 @@ class GrammarCheck:
                 msg.warn(element)
                 for error in errors:
                     msg.fail(error)
+
+    @property
+    def has_error(self):
+
+        assert self._result is not None, "Проверка еще не была выполнена"
+
+        return bool(self._result)
