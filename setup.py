@@ -12,7 +12,7 @@ author = "a.krapivin"
 email = "a.krapivin@kontur.ru"
 url = "https://git.skbkontur.ru/edi1c/grammarnazi"
 
-requires = ["pyaspeller", "Click", "junit-xml", "wasabi"]
+requires = ["pyaspeller", "Click", "junit-xml", "wasabi", "tqdm"]
 requires_test = ["pytest", "pytest-cov", "pytest-runner", "pytest-click"]
 requires_dev = requires_test + ["black", "flake8"]
 

@@ -1,6 +1,6 @@
 import pytest
 
-from kontur.checkgrammar.grammar import GrammarCheck
+from kontur.checkgrammar.grammar import GrammarCheck, checkYaSpeller
 
 
 @pytest.fixture
@@ -34,21 +34,18 @@ def check_no_errors():
 def test_update_dict_from_file():
     check = GrammarCheck()
     check.update_dict_from_file("tests/fixture/dictionary/dict.txt")
-
     assert len(check._dict) == 4, "Некорректно разобран словарь из файла"
 
 
 def test_update_dict_from_bsl():
     check = GrammarCheck()
     check.update_dict_from_bsl("tests/fixture/dictionary/bsl-language-server.json")
-
     assert len(check._dict) == 5, "Некорректно разобран словарь из файла"
 
 
 def test_add_src():
     check = GrammarCheck()
     check.add_src("tests/fixture/epf_mistakes/")
-
     assert len(check._src) == 1, "Не удалось добавить каталог исходников"
 
     check.add_src("tests/fixture/epf_right/")
@@ -56,23 +53,19 @@ def test_add_src():
 
 
 def test_check_ya_speller_error():
-    check = GrammarCheck()
-    result = check.checkYaSpeller("Конртагент")
-
+    result = checkYaSpeller("Конртагент")
     assert result, "Не найдено ошибок"
 
 
 def test_check_ya_speller_no_error():
-    check = GrammarCheck()
-    result = check.checkYaSpeller("Контрагент")
-
+    result = checkYaSpeller("Контрагент")
     assert not result, "Найдены ошибки"
 
 
 def test_check_ya_speller_no_error_with_dict():
     check = GrammarCheck()
     check.update_dict_from_file("tests/fixture/dictionary/dict.txt")
-    result = check.checkYaSpeller("КоНрТаГеНт  ")
+    result = checkYaSpeller("КоНрТаГеНт  ", tuple(check._dict))
 
     assert not result, "Найдены ошибки"
 

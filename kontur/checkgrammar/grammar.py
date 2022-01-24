@@ -5,9 +5,24 @@ from typing import List
 
 import junit_xml
 from pyaspeller import YandexSpeller
+from tqdm import tqdm
 from wasabi import Printer
 
 from kontur.checkgrammar import parse
+
+ya_speller = YandexSpeller(lang="ru", ignore_urls=True, ignore_latin=True)
+
+
+@lru_cache(maxsize=2048)
+def checkYaSpeller(text: str, out_dict=tuple()) -> List[str]:
+    result = []
+    # find those words that may be misspelled
+    check = ya_speller.spell(text)
+    for res in check:
+        if res["s"] and res["word"].lower() not in out_dict:  # Есть варианты замены
+            result.append(f"{res['word']} -> {res['s']}")
+
+    return result
 
 
 class Error:
@@ -75,23 +90,6 @@ class GrammarCheck:
 
         self._src.append(src)
 
-    def checkYaSpeller(self, text_for_check) -> list:
-        @lru_cache(maxsize=128)
-        def speller(text):
-            ya_speller = YandexSpeller(lang="ru", ignore_urls=True, ignore_latin=True)
-            return ya_speller.spell(text_for_check)
-
-        result = []
-        # find those words that may be misspelled
-        check = speller(text_for_check)
-        for res in check:
-            if (
-                res["s"] and res["word"].lower() not in self._dict
-            ):  # Есть варианты замены
-                result.append(f"{res['word']} -> {res['s']}")
-
-        return result
-
     def run(self):
         """
         Запуск проверки орфографии
@@ -99,6 +97,7 @@ class GrammarCheck:
         assert self._src, "Не указаны каталоги для проверки"
 
         result = {}
+        our_dict = tuple(self._dict)
         for src in self._src:
             objects = parse.parseSrc(src)
 
@@ -107,15 +106,17 @@ class GrammarCheck:
                     key = obj
                 else:
                     key = f"{src}->{obj}"
-                for element, text in elements.items():
-                    if len(text) >= 3:
-                        errors = self.checkYaSpeller(text)
+                for element, text in tqdm(elements.items(), desc=obj):
+                    if len(text) <= 3:
+                        continue
+
+                    errors = checkYaSpeller(text, our_dict)
 
                     if errors:
                         if obj not in result:
                             result[key] = []
                         result[key].append(Error(obj, element, text, errors))
-
+        print(checkYaSpeller.cache_info())
         self._result = result
 
     def dump_junit(self, path_to_xml):
