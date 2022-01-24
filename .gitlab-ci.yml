@@ -11,7 +11,7 @@ test:junit:
   resource_group: $PYTEST_36_RESOURCE_GROUP
   script:
     - python3 -m pip install --editable .
-    - checkgrammar tests/fixture/epf_mistakes --junit junit.xml --dry-run
+    - onec-checkgrammar tests/fixture/epf_mistakes --junit junit.xml --dry-run
 
   rules:
     - if: '$CI_MERGE_REQUEST_EVENT_TYPE == "detached"'

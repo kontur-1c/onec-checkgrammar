@@ -7,7 +7,7 @@ package_version = os.environ.get("CI_COMMIT_TAG") or "0.dev0"
 with open("README.md", "r", encoding="utf-8") as readme:
     long_description = readme.read()
 
-title = "kontur-retail1c-checkgrammar"
+title = "onec-checkgrammar"
 author = "a.krapivin"
 email = "a.krapivin@kontur.ru"
 url = "https://git.skbkontur.ru/edi1c/grammarnazi"
@@ -29,7 +29,7 @@ setup(
     url=url,
     packages=find_namespace_packages(include=["kontur.*"]),
     entry_points={
-        "console_scripts": ["checkgrammar=kontur.checkgrammar.cli:cli"]
+        "console_scripts": ["onec-checkgrammar=kontur.checkgrammar.cli:cli"]
     },
     include_package_data=True,
     author=author,

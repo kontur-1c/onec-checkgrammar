@@ -37,9 +37,8 @@ def cli(src, dictionary, bsl, junit, dry_run):
     Можно указать несколько через пробел"""
 
     check = GrammarCheck()
-    if dictionary:
-        for d in dictionary:
-            check.update_dict_from_file(d)
+    for d in dictionary:
+        check.update_dict_from_file(d)
 
     if bsl:
         check.update_dict_from_bsl(bsl)
@@ -52,7 +51,7 @@ def cli(src, dictionary, bsl, junit, dry_run):
     if junit is not None:
         check.dump_junit(junit)
 
-    if check.has_error:
+    if check.has_errors:
         print("Обнаружены ошибки", file=sys.stderr)
         check.print()
         if not dry_run:

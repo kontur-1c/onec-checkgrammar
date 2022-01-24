@@ -90,7 +90,7 @@ def test_run(check_errors):
 
 
 def test_has_error(check_errors):
-    assert check_errors.has_error
+    assert check_errors.has_errors
 
 
 def test_dump_junit(check_errors, temp_xml):
@@ -128,7 +128,7 @@ def test_run_no_error(check_no_errors):
 
 
 def test_has_no_error(check_no_errors):
-    assert not check_no_errors.has_error
+    assert not check_no_errors.has_errors
 
 
 def test_dump_junit_no_error(check_no_errors, temp_xml):
