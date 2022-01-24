@@ -28,7 +28,7 @@ class GrammarCheck:
     def update_dict_from_file(self, path_to_dict: str):
         """
         Дополняет словарь исключений
-                        :param path_to_dict: путь до файла со словарем
+            :param path_to_dict: путь до файла со словарем
         """
         full_path = os.path.abspath(path_to_dict)
         assert os.path.exists(full_path), f"Не найден словарь {full_path}"
@@ -41,7 +41,7 @@ class GrammarCheck:
     def update_dict_from_bsl(self, bsl_settings="./.bsl-language-server.json"):
         """
         Дополняет словарь исключений из настроек bsl
-                :param bsl_settings: путь до настроек .bsl-language-server.json
+            :param bsl_settings: путь до настроек .bsl-language-server.json
         """
         full_path = os.path.abspath(bsl_settings)
         assert os.path.exists(
@@ -68,7 +68,7 @@ class GrammarCheck:
     def add_src(self, src: str):
         """
         Добавить каталог с исходниками для обработки
-                :param src: путь до каталога исходников
+            :param src: путь до каталога исходников
         """
         full_path = os.path.abspath(src)
         assert os.path.exists(full_path), f"Не найден каталог исходников {full_path}"
@@ -93,7 +93,9 @@ class GrammarCheck:
         return result
 
     def run(self):
-
+        """
+        Запуск проверки орфографии
+        """
         assert self._src, "Не указаны каталоги для проверки"
 
         result = {}
@@ -147,6 +149,9 @@ class GrammarCheck:
             junit_xml.to_xml_report_file(f, ts, encoding="utf-8")
 
     def print(self):
+        """
+        Вывод на экран результатов проверки
+        """
         assert self._result is not None, "Проверка еще не была выполнена"
         msg = Printer()
         for obj, details in self._result.items():
@@ -157,8 +162,11 @@ class GrammarCheck:
                     msg.fail(error)
 
     @property
-    def has_error(self):
-
+    def has_errors(self) -> bool:
+        """
+        Признак что были ошибки при проверке
+        :return:
+        """
         assert self._result is not None, "Проверка еще не была выполнена"
 
         return bool(self._result)
