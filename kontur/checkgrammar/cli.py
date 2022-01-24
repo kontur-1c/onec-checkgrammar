@@ -18,7 +18,7 @@ import sys
     "--bsl-settings",
     "bsl",
     is_flag=False,
-    flag_value="bsl-language-server.json",
+    flag_value=".bsl-language-server.json",
     help="Получить словарь из настроек bsl-language-server.json",
 )
 @click.option(
