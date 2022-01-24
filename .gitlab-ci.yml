@@ -5,6 +5,21 @@ include:
 variables:
   MYPY_ALLOW_FAILURE: "true"
 
+test:junit:
+  extends: test:python37
+  image: python:3.6-buster
+  resource_group: $PYTEST_36_RESOURCE_GROUP
+  script:
+    - python3 -m pip install --editable .
+    - checkgrammar tests/fixture/epf_mistakes --junit junit.xml --dry-run
+
+  rules:
+    - if: '$CI_MERGE_REQUEST_EVENT_TYPE == "detached"'
+      when: never
+    - if: '$PY_SKIP_36_TESTS == "true"'
+      when: never
+    - when: always
+
 release:
   stage: build-and-push
   image: registry.gitlab.com/gitlab-org/release-cli:latest

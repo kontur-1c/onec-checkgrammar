@@ -12,7 +12,7 @@ def temp_xml(tmpdir_factory):
     return fn
 
 
-def test_cli_error():
+def test_error():
     runner = CliRunner()
     result = runner.invoke(cli, ["./tests/fixture/epf_mistakes/"])
 
@@ -20,7 +20,7 @@ def test_cli_error():
     assert "Обнаружены ошибки" in result.output
 
 
-def test_cli_no_error():
+def test_no_error():
     runner = CliRunner()
     result = runner.invoke(cli, ["./tests/fixture/epf_right/"])
 
@@ -28,7 +28,7 @@ def test_cli_no_error():
     assert "Нет ошибок" in result.output
 
 
-def test_cli_error_dict():
+def test_error_dict():
     runner = CliRunner()
     result = runner.invoke(
         cli,
@@ -43,7 +43,7 @@ def test_cli_error_dict():
     assert "палями" not in result.output
 
 
-def test_cli_error_bsl():
+def test_error_bsl():
     runner = CliRunner()
     result = runner.invoke(
         cli,
@@ -58,7 +58,7 @@ def test_cli_error_bsl():
     assert "палями" not in result.output
 
 
-def test_cli_error_junit(temp_xml):
+def test_error_junit(temp_xml):
     runner = CliRunner()
     result = runner.invoke(cli, ["--junit", temp_xml, "./tests/fixture/epf_mistakes/"])
 
@@ -66,7 +66,7 @@ def test_cli_error_junit(temp_xml):
     assert os.path.exists(temp_xml)
 
 
-def test_cli_multi_src(temp_xml):
+def test_multi_src(temp_xml):
     runner = CliRunner()
     result = runner.invoke(
         cli, ["./tests/fixture/epf_mistakes/", "./tests/fixture/epf_right/"]
