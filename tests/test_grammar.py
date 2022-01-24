@@ -96,7 +96,7 @@ def test_has_error(check_errors):
 def test_dump_junit(check_errors, temp_xml):
     check_errors.dump_junit(temp_xml)
     must_be = [
-        'errors="3"',
+        'failures="3"',
         "ГраппаСПолями.Заголовок",
         "Реквизит2.Заголовок",
     ]
@@ -135,7 +135,7 @@ def test_dump_junit_no_error(check_no_errors, temp_xml):
     check_no_errors.dump_junit(temp_xml)
     with open(temp_xml, "r", encoding="utf-8") as f:
         xml = f.read()
-        assert xml == "<testsuites />"
+        assert xml == '<?xml version="1.0" encoding="utf-8"?>\n<testsuites/>\n'
 
 
 def test_print_no_error(check_no_errors, capsys):

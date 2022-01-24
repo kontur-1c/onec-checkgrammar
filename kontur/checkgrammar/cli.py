@@ -21,8 +21,15 @@ import sys
     flag_value="bsl-language-server.json",
     help="Получить словарь из настроек bsl-language-server.json",
 )
+@click.option(
+    "--dry-run",
+    "dry_run",
+    is_flag=True,
+    help="Не ронять тесты"
+
+)
 @click.option("--junit", default=None, help="Файл отчета в формате junit")
-def cli(src, dictionary, bsl, junit):
+def cli(src, dictionary, bsl, junit, dry_run):
     """Проверка орфографии элементов форм в каталоге SRC.
 
     SRC каталог исходников конфигурации или внешней обработки/отчета.
@@ -30,7 +37,7 @@ def cli(src, dictionary, bsl, junit):
     Можно указать несколько через пробел"""
 
     check = GrammarCheck()
-    if dictionary is not None:
+    if dictionary:
         for d in dictionary:
             check.update_dict_from_file(d)
 
@@ -48,7 +55,8 @@ def cli(src, dictionary, bsl, junit):
     if check.has_error:
         print("Обнаружены ошибки", file=sys.stderr)
         check.print()
-        sys.exit(1)
+        if not dry_run:
+            sys.exit(1)
     else:
         print("Нет ошибок", file=sys.stdout)
         sys.exit(0)

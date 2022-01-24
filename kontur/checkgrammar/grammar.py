@@ -1,12 +1,21 @@
 import json
 import os
+from functools import lru_cache
+from typing import List
 
-from junit_xml import TestCase, TestSuite
+import junit_xml
 from pyaspeller import YandexSpeller
 from wasabi import Printer
-from functools import lru_cache
 
 from kontur.checkgrammar import parse
+
+
+class Error:
+    def __init__(self, form: str, element: str, text: str, errors: List[str]):
+        self.form = form
+        self.element = element
+        self.text = text
+        self.errors = errors
 
 
 class GrammarCheck:
@@ -102,8 +111,8 @@ class GrammarCheck:
 
                     if errors:
                         if obj not in result:
-                            result[key] = {}
-                        result[key].update({element: errors})
+                            result[key] = []
+                        result[key].append(Error(obj, element, text, errors))
 
         self._result = result
 
@@ -117,30 +126,34 @@ class GrammarCheck:
 
         full_path = os.path.abspath(path_to_xml)
         ts = []
-        for obj, elements in self._result.items():
+        for obj, details in self._result.items():
 
             test_cases = []
-            for element, errors in elements.items():
-                test_case = TestCase(element, classname=obj)
-                test_case.add_error_info(
-                    message="\n".join(errors),
-                    error_type="Typo",
+            for data in details:
+                test_case = junit_xml.TestCase(
+                    data.element,
+                    classname=obj,
+                    allow_multiple_subelements=True,
+                    stderr=f"Возможно опечатка в тексте: {data.text}",
                 )
+
+                for error in data.errors:
+                    test_case.add_failure_info(error, failure_type="WARNING")
                 test_cases.append(test_case)
 
-            ts.append(TestSuite(obj, test_cases))
+            ts.append(junit_xml.TestSuite(obj, test_cases))
 
         with open(full_path, "w", encoding="utf-8") as f:
-            TestSuite.to_file(f, ts, prettyprint=False, encoding="utf-8")
+            junit_xml.to_xml_report_file(f, ts, encoding="utf-8")
 
     def print(self):
         assert self._result is not None, "Проверка еще не была выполнена"
         msg = Printer()
-        for obj, elements in self._result.items():
+        for obj, details in self._result.items():
             msg.divider(obj)
-            for element, errors in elements.items():
-                msg.warn(element)
-                for error in errors:
+            for data in details:
+                msg.warn(data.element)
+                for error in data.errors:
                     msg.fail(error)
 
     @property
