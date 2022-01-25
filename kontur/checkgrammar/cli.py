@@ -21,13 +21,7 @@ import sys
     flag_value=".bsl-language-server.json",
     help="Получить словарь из настроек bsl-language-server.json",
 )
-@click.option(
-    "--dry-run",
-    "dry_run",
-    is_flag=True,
-    help="Не ронять тесты"
-
-)
+@click.option("--dry-run", "dry_run", is_flag=True, help="Не ронять тесты")
 @click.option("--junit", default=None, help="Файл отчета в формате junit")
 def cli(src, dictionary, bsl, junit, dry_run):
     """Проверка орфографии элементов форм в каталоге SRC.

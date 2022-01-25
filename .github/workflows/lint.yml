@@ -27,11 +27,14 @@ jobs:
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 kontur --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Lint with mypy
+        if: always()
         run: |
             mypy --config-file mypy.ini --install-types --non-interactive kontur
       - name: Lint with black
+        if: always()
         run: |
             black --check kontur
       - name: Check with isort
+        if: always()
         run: |
             isort --check-only kontur
