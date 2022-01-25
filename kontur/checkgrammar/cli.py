@@ -1,6 +1,8 @@
-import click
-from kontur.checkgrammar.grammar import GrammarCheck
 import sys
+
+import click
+
+from kontur.checkgrammar.grammar import GrammarCheck
 
 
 @click.command()

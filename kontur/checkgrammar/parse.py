@@ -1,7 +1,7 @@
-import os
 import glob
-from xml.etree import ElementTree as Et
+import os
 from typing import Dict, Union
+from xml.etree import ElementTree as Et
 
 namespaces = {
     "logform": "http://v8.1c.ru/8.3/xcf/logform",
