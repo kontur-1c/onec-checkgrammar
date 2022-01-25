@@ -2,7 +2,7 @@ import os
 
 from setuptools import find_namespace_packages, setup
 
-package_version = os.environ.get("CI_COMMIT_TAG") or "0.dev0"
+package_version = os.environ.get("GITHUB_REF_NAME") or "0.dev0"
 
 with open("README.md", "r", encoding="utf-8") as readme:
     long_description = readme.read()
