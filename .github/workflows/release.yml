@@ -24,7 +24,7 @@ jobs:
         id: changelog_reader
         uses: mindsers/changelog-reader-action@v2
         with:
-          version: ${{ steps.tag_name.outputs.current_version }}
+          version: ${{ steps.get_version.outputs.VERSION }}
           path: ./CHANGELOG.md
       - name: Create draft release
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
