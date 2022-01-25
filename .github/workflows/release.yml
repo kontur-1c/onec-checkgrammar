@@ -11,7 +11,7 @@ jobs:
   release-candidate:
     name: Create Release
     runs-on: ubuntu-latest
-    if: startsWith( github.ref, 'rc')
+    if: github.event.ref_type == 'tag' && startsWith( github.event.ref, 'rc')
     steps:
       - name: Get version from tag
         id: tag_name
@@ -41,7 +41,7 @@ jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
-    if: startsWith( github.ref, 'v')
+    if: github.event.ref_type == 'tag' && startsWith( github.event.ref, 'v')
     steps:
       - name: Get version from tag
         id: tag_name
