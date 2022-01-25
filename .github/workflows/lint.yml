@@ -27,11 +27,11 @@ jobs:
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Lint with mypy
-          run: |
+        run: |
             mypy --config-file mypy.ini --install-types --non-interactive .
       - name: Lint with black
-          run: |
+        run: |
             black --check skill
       - name: Check with isort
-          run: |
+        run: |
             isort --check-only skill
