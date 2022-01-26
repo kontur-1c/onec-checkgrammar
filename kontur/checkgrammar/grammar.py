@@ -115,7 +115,9 @@ class GrammarCheck:
                     if len(text) <= 3:
                         continue
 
-                    text_to_check = ' '.join([re.sub(r'[0-9]+', '', x) for x in text.split(' ')])
+                    text_to_check = " ".join(
+                        [re.sub(r"[0-9]+", "", x) for x in text.split(" ")]
+                    )
 
                     errors = checkYaSpeller(text_to_check, our_dict)
 
@@ -124,11 +126,11 @@ class GrammarCheck:
                             result[key] = []
                         result[key].append(Error(obj, element, text, errors))
         msg = Printer()
-        msg.divider("СТАТИСТИКА", char='*')
+        msg.divider("СТАТИСТИКА", char="*")
         msg.info(f"Время {datetime.now() - start_time}")
         msg.info(f"Обнаружено ошибок {sum([len(x) for x in result.items()])}")
         msg.info(f"{checkYaSpeller.cache_info()}")
-        msg.divider("=", char='*')
+        msg.divider("=", char="*")
 
         self._result = result
 
