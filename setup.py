@@ -2,7 +2,7 @@ import os
 import re
 from setuptools import find_namespace_packages, setup
 
-package_version = os.environ.get("VERSION")
+package_version = os.environ.get("VERSION", "0.0.0-dev")
 
 if not re.match(r"\d+\.\d+\.\d(\-.*)?", package_version):
     package_version = "0.0.0-dev"
