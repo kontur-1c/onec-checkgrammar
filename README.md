@@ -1,3 +1,5 @@
+[![Python tests](https://github.com/kontur-1c/onec-grammarcheck/actions/workflows/tests.yml/badge.svg)](https://github.com/kontur-1c/onec-grammarcheck/actions/workflows/tests.yml)
+
 # onec-grammarcheck
 
 Проверка орфографии элементов форм
