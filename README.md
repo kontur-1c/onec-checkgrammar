@@ -8,7 +8,7 @@
 
 ## Установка
 
-### Из пакетов (coming soon)
+### Из пакетов
 
 ```bash
 pip install onec-grammarcheck
