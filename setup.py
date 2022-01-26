@@ -2,9 +2,9 @@ import os
 import re
 from setuptools import find_namespace_packages, setup
 
-package_version = os.environ.get("VERSION", "0.0.0-dev")
+package_version = os.environ.get("VERSION", "0.0.0.dev0")
 
-if not re.match(r"\d+\.\d+\.\d(\-.*)?", package_version):
+if not re.match(r"\d+\.\d+\.\d(\..*)?", package_version):
     package_version = "0.0.0-dev"
 with open("README.md", "r", encoding="utf-8") as readme:
     long_description = readme.read()
