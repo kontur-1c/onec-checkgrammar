@@ -1,10 +1,10 @@
 import os
-import semver
+import re
 from setuptools import find_namespace_packages, setup
 
 package_version = os.environ.get("VERSION")
 
-if not semver.isvalid(package_version):
+if not re.match(r"\d+\.\d+\.\d(\-.*)?"):
     package_version = "0.0.0-dev"
 with open("README.md", "r", encoding="utf-8") as readme:
     long_description = readme.read()
@@ -16,7 +16,7 @@ url = "https://github.com/kontur-1c/onec-grammarcheck"
 
 requires = ["pyaspeller", "Click", "junit-xml", "wasabi", "tqdm"]
 requires_test = ["pytest", "pytest-cov", "pytest-runner", "pytest-click"]
-requires_dev = requires_test + ["black", "flake8", "semver"]
+requires_dev = requires_test + ["black", "flake8"]
 
 setup(
     name=title,
