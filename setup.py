@@ -9,8 +9,8 @@ with open("README.md", "r", encoding="utf-8") as readme:
 
 title = "onec-checkgrammar"
 author = "a.krapivin"
-email = "a.krapivin@kontur.ru"
-url = "https://git.skbkontur.ru/edi1c/grammarnazi"
+email = "krapivin_andrey@mail.ru"
+url = "https://github.com/kontur-1c/onec-grammarcheck"
 
 requires = ["pyaspeller", "Click", "junit-xml", "wasabi", "tqdm"]
 requires_test = ["pytest", "pytest-cov", "pytest-runner", "pytest-click"]
@@ -19,7 +19,7 @@ requires_dev = requires_test + ["black", "flake8"]
 setup(
     name=title,
     version=package_version,
-    description="Проверка орфографии элементов формы",
+    description="Проверка орфографии элементов формы для 1с",
     long_description=long_description,
     long_description_content_type="text/markdown",
     python_requires=">=3.6",
