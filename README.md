@@ -1,6 +1,6 @@
-[![Python tests](https://github.com/kontur-1c/onec-grammarcheck/actions/workflows/tests.yml/badge.svg)](https://github.com/kontur-1c/onec-grammarcheck/actions/workflows/tests.yml)
+[![Python tests](https://github.com/kontur-1c/onec-checkgrammar/actions/workflows/tests.yml/badge.svg)](https://github.com/kontur-1c/onec-checkgrammar/actions/workflows/tests.yml)
 
-# onec-grammarcheck
+# onec-checkgrammar
 
 Проверка орфографии элементов форм
 
@@ -11,7 +11,7 @@
 ### Из пакетов
 
 ```bash
-pip install onec-grammarcheck
+pip install onec-checkgrammar
 ```
 
 ### Из репозитория
@@ -25,7 +25,7 @@ pip install .
 ### Простая проверка
 
 ```bash
-onec-grammarcheck ./src
+onec-checkgrammar ./src
 ```
 
 Будут выбраны все файлы форм в формате xml. Из них извлечены элементы для которых заданы:
@@ -36,13 +36,13 @@ onec-grammarcheck ./src
 ### Проверка нескольких папок
 
 ```bash
-onec-grammarcheck ./src1 ./src2
+onec-checkgrammar ./src1 ./src2
 ```
 
 ### Результат проверки в формате JUnit 
 
 ```bash
-onec-grammarcheck ./src --junit junit.xml
+onec-checkgrammar ./src --junit junit.xml
 ```
 
 ### Словари исключений
@@ -52,7 +52,7 @@ onec-grammarcheck ./src --junit junit.xml
 #### Явное указание
 
 ```bash
-onec-grammarcheck ./src --dict dict.txt
+onec-checkgrammar ./src --dict dict.txt
 ```
 
 Слова должны быть разделены переносом строк
@@ -60,7 +60,7 @@ onec-grammarcheck ./src --dict dict.txt
 Можно указать несколько словарей
 
 ```bash
-onec-grammarcheck ./src --dict dict1.txt --dict dict2.txt
+onec-checkgrammar ./src --dict dict1.txt --dict dict2.txt
 ```
 
 #### Настройки BSL language server
@@ -68,13 +68,13 @@ onec-grammarcheck ./src --dict dict1.txt --dict dict2.txt
 Если у Вас в настройках указаны исключения для опечаток, можно использовать их повторно
 
 ```bash
-onec-grammarcheck ./src -bsl
+onec-checkgrammar ./src -bsl
 ```
 
 Будут взяты настройки из файла *.bsl-language-server.json*
 
 ```bash
-onec-grammarcheck ./src -bsl /my-bsl.json
+onec-checkgrammar ./src -bsl /my-bsl.json
 ```
 
 Явное указание файла настроек
