@@ -22,6 +22,7 @@ class Error:
         self.text = text
         self.errors = errors
 
+
 class GrammarError:
     def __init__(self, word: str, variants: List[str]):
         self.word = word
@@ -42,7 +43,7 @@ def checkYaSpeller(text: str, out_dict=tuple()) -> List[str]:
     check = ya_speller.spell(text)
     for res in check:
         if res["s"] and res["word"].lower() not in out_dict:  # Есть варианты замены
-            result.append(GrammarError(res['word'], res['s']))
+            result.append(GrammarError(res["word"], res["s"]))
 
     return result
 
@@ -200,7 +201,7 @@ class GrammarCheck:
                 for error in data.errors:
                     result.add(error.word)
 
-        with open(full_path, 'w') as f:
+        with open(full_path, "w") as f:
             f.writelines(result)
 
     @property
