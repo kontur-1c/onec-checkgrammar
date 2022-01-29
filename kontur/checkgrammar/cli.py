@@ -24,8 +24,9 @@ from kontur.checkgrammar.grammar import GrammarCheck
     help="Получить словарь из настроек bsl-language-server.json",
 )
 @click.option("--dry-run", "dry_run", is_flag=True, help="Не ронять тесты")
-@click.option("--junit", default=None, help="Файл отчета в формате junit")
-def cli(src, dictionary, bsl, junit, dry_run):
+@click.option("--junit", "junit", default=None, help="Файл отчета в формате junit")
+@click.option("--output", "output", default=None, help="Файл для ошибок")
+def cli(src, dictionary, bsl, junit, output, dry_run):
     """Проверка орфографии элементов форм в каталоге SRC.
 
     SRC каталог исходников конфигурации или внешней обработки/отчета.
@@ -46,6 +47,9 @@ def cli(src, dictionary, bsl, junit, dry_run):
 
     if junit is not None:
         check.dump_junit(junit)
+
+    if output is not None:
+        check.dump_dict(output)
 
     if check.has_errors:
         print("Обнаружены ошибки", file=sys.stderr)

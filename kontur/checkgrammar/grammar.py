@@ -15,25 +15,37 @@ from kontur.checkgrammar import parse
 ya_speller = YandexSpeller(lang="ru", ignore_urls=True, ignore_latin=True)
 
 
-@lru_cache(maxsize=2048)
-def checkYaSpeller(text: str, out_dict=tuple()) -> List[str]:
-    # Подготовить текст. Спеллер плохо проверяет слова с цифрами
-    result = []
-
-    check = ya_speller.spell(text)
-    for res in check:
-        if res["s"] and res["word"].lower() not in out_dict:  # Есть варианты замены
-            result.append(f"{res['word']} -> {res['s']}")
-
-    return result
-
-
 class Error:
     def __init__(self, form: str, element: str, text: str, errors: List[str]):
         self.form = form
         self.element = element
         self.text = text
         self.errors = errors
+
+
+class GrammarError:
+    def __init__(self, word: str, variants: List[str]):
+        self.word = word
+        self.variants = variants
+
+    def __str__(self):
+        return f"{self.word} -> {self.variants}"
+
+    def __repr__(self):
+        return str(self)
+
+
+@lru_cache(maxsize=2048)
+def checkYaSpeller(text: str, out_dict=tuple()) -> List[GrammarError]:
+    # Подготовить текст. Спеллер плохо проверяет слова с цифрами
+    result = []
+
+    check = ya_speller.spell(text)
+    for res in check:
+        if res["s"] and res["word"].lower() not in out_dict:  # Есть варианты замены
+            result.append(GrammarError(res["word"], res["s"]))
+
+    return result
 
 
 class GrammarCheck:
@@ -177,11 +189,27 @@ class GrammarCheck:
                 for error in data.errors:
                     msg.fail(error)
 
+    def dump_dict(self, path):
+        """
+        Выгрузка отчета в файл. Чтобы было проще готовить файл исключений
+        :param path: путь для выгрузки отчета
+        """
+        full_path = os.path.abspath(path)
+        result = set()
+        for obj, details in self._result.items():
+            for data in details:
+                for error in data.errors:
+                    result.add(error.word.lower())
+
+        with open(full_path, "w", encoding="utf-8") as f:
+            for s in result:
+                f.write(s + "\n")
+
     @property
     def has_errors(self) -> bool:
         """
-        Признак что были ошибки при проверке
-        :return:
+        Были ошибки при проверке
+            :return: bool
         """
         assert self._result is not None, "Проверка еще не была выполнена"
 
