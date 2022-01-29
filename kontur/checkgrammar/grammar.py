@@ -36,7 +36,7 @@ class GrammarError:
 
 
 @lru_cache(maxsize=2048)
-def checkYaSpeller(text: str, out_dict=tuple()) -> List[str]:
+def checkYaSpeller(text: str, out_dict=tuple()) -> List[GrammarError]:
     # Подготовить текст. Спеллер плохо проверяет слова с цифрами
     result = []
 
