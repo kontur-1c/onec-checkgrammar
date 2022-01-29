@@ -199,10 +199,11 @@ class GrammarCheck:
         for obj, details in self._result.items():
             for data in details:
                 for error in data.errors:
-                    result.add(error.word)
+                    result.add(error.word.lower())
 
-        with open(full_path, "w") as f:
-            f.writelines(result)
+        with open(full_path, "w", encoding="utf-8") as f:
+            for s in result:
+                f.write(s + "\n")
 
     @property
     def has_errors(self) -> bool:
