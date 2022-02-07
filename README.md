@@ -1,4 +1,5 @@
 [![Python tests](https://github.com/kontur-1c/onec-checkgrammar/actions/workflows/tests.yml/badge.svg)](https://github.com/kontur-1c/onec-checkgrammar/actions/workflows/tests.yml)
+![PyPI - Downloads](https://img.shields.io:/pypi/dm/onec-checkgrammar)
 
 # onec-checkgrammar
 
