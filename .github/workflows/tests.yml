@@ -22,7 +22,7 @@ jobs:
         python -m pip install pytest pytest-cov
     - name: Test with pytest
       run: |
-        python setup.py pytest --addopts --junitxml=junit.xml --cov=./ --cov-report=xml
+        pytest --junitxml=junit.xml --cov=./ --cov-report=xml
     - name: Publish Test Report
       uses: mikepenz/action-junit-report@v2
       if: always() # always run even if the previous step fails
