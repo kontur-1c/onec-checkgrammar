@@ -6,7 +6,7 @@ from xml.etree import ElementTree as Et
 namespaces = {
     "logform": "http://v8.1c.ru/8.3/xcf/logform",
     "core": "http://v8.1c.ru/8.1/data/core",
-    "xr": "http://v8.1c.ru/8.3/xcf/readable"
+    "xr": "http://v8.1c.ru/8.3/xcf/readable",
 }
 
 
@@ -73,9 +73,9 @@ def getChildItems(obj: Et.Element) -> Dict[str, str]:
                     continue
                 presentation = choice_value.find("logform:Presentation", namespaces)
                 value = choice_value.find("logform:Value", namespaces)
-                if presentation.text is not None:
+                if presentation is not None and presentation.text is not None:
                     result[f"{name}.List{num}.Представление"] = presentation.text
-                elif value.text is not None:
+                elif value is not None and value.text is not None:
                     result[f"{name}.List{num}.Значение"] = value.text
                 num += 1
 
