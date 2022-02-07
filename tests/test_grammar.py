@@ -79,7 +79,7 @@ def test_run(check_errors):
 
     elements = check_errors._result["ТестоваяОбработка.Форма"]
 
-    assert len(elements) == 3
+    assert len(elements) == 5
 
 
 def test_has_error(check_errors):
@@ -89,7 +89,7 @@ def test_has_error(check_errors):
 def test_dump_junit(check_errors, temp_xml):
     check_errors.dump_junit(temp_xml)
     must_be = [
-        'failures="3"',
+        'failures="5"',
         "ГраппаСПолями.Заголовок",
         "Реквизит2.Заголовок",
     ]

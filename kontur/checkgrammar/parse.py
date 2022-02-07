@@ -6,6 +6,7 @@ from xml.etree import ElementTree as Et
 namespaces = {
     "logform": "http://v8.1c.ru/8.3/xcf/logform",
     "core": "http://v8.1c.ru/8.1/data/core",
+    "xr": "http://v8.1c.ru/8.3/xcf/readable"
 }
 
 
@@ -62,6 +63,21 @@ def getChildItems(obj: Et.Element) -> Dict[str, str]:
             content = getRuContent(ext_tooltip)
             if content is not None:
                 result[f"{name}.РасшПодсказка"] = content
+
+        choice_list = element.findall("logform:ChoiceList/*", namespaces)
+        if choice_list:
+            num = 0
+            for choice in choice_list:
+                choice_value = choice.find("xr:Value", namespaces)
+                if choice_value is None:
+                    continue
+                presentation = choice_value.find("logform:Presentation", namespaces)
+                value = choice_value.find("logform:Value", namespaces)
+                if presentation.text is not None:
+                    result[f"{name}.List{num}.Представление"] = presentation.text
+                elif value.text is not None:
+                    result[f"{name}.List{num}.Значение"] = value.text
+                num += 1
 
         result.update(getChildItems(element))
     return result
