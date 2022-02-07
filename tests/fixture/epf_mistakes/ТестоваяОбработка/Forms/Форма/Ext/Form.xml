@@ -146,7 +146,7 @@
 					<Title>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Переключатели</v8:content>
+							<v8:content>Выбор из списка</v8:content>
 						</v8:item>
 					</Title>
 					<ToolTip>
@@ -184,7 +184,7 @@
 										<Presentation>
 											<v8:item>
 												<v8:lang>ru</v8:lang>
-												<v8:content>Третий вориант</v8:content>
+												<v8:content>Третий вариант</v8:content>
 											</v8:item>
 										</Presentation>
 										<Value xsi:type="xs:string">Третый вориант</Value>
@@ -194,6 +194,43 @@
 							<ContextMenu name="Реквизит3КонтекстноеМеню" id="31"/>
 							<ExtendedTooltip name="Реквизит3РасширеннаяПодсказка" id="32"/>
 						</RadioButtonField>
+						<InputField name="Реквизит4" id="33">
+							<DataPath>Реквизит4</DataPath>
+							<ListChoiceMode>true</ListChoiceMode>
+							<ChoiceList>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation/>
+										<Value xsi:type="xs:string">Раз</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation/>
+										<Value xsi:type="xs:string">Двыа</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>Три</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">Тры</Value>
+									</xr:Value>
+								</xr:Item>
+							</ChoiceList>
+							<ContextMenu name="Реквизит4КонтекстноеМеню" id="34"/>
+							<ExtendedTooltip name="Реквизит4РасширеннаяПодсказка" id="35"/>
+						</InputField>
 					</ChildItems>
 				</Page>
 			</ChildItems>
@@ -262,6 +299,15 @@
 			</Type>
 		</Attribute>
 		<Attribute name="Реквизит3" id="5">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Реквизит4" id="6">
 			<Type>
 				<v8:Type>xs:string</v8:Type>
 				<v8:StringQualifiers>
