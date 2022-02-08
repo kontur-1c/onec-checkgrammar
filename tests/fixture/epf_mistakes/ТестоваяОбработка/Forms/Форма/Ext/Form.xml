@@ -248,7 +248,7 @@
 					</ToolTip>
 					<ExtendedTooltip name="ГруппаНевидимостьРасширеннаяПодсказка" id="37"/>
 					<ChildItems>
-						<InputField name="Реквизит5" id="38">
+						<InputField name="ПолеБезЗаголовка" id="38">
 							<DataPath>Реквизит1</DataPath>
 							<Title>
 								<v8:item>
@@ -257,10 +257,10 @@
 								</v8:item>
 							</Title>
 							<TitleLocation>None</TitleLocation>
-							<ContextMenu name="Реквизит5КонтекстноеМеню" id="39"/>
-							<ExtendedTooltip name="Реквизит5РасширеннаяПодсказка" id="40"/>
+							<ContextMenu name="ПолеБезЗаголовкаКонтекстноеМеню" id="39"/>
+							<ExtendedTooltip name="ПолеБезЗаголовкаРасширеннаяПодсказка" id="40"/>
 						</InputField>
-						<RadioButtonField name="Реквизит6" id="41">
+						<RadioButtonField name="ПереключательБезЗаголовка" id="41">
 							<DataPath>Реквизит3</DataPath>
 							<Title>
 								<v8:item>
@@ -276,7 +276,7 @@
 									<xr:CheckState>0</xr:CheckState>
 									<xr:Value xsi:type="FormChoiceListDesTimeValue">
 										<Presentation/>
-										<Value xsi:type="xs:string">Первый вариант</Value>
+										<Value xsi:type="xs:string">Первый</Value>
 									</xr:Value>
 								</xr:Item>
 								<xr:Item>
@@ -284,27 +284,22 @@
 									<xr:CheckState>0</xr:CheckState>
 									<xr:Value xsi:type="FormChoiceListDesTimeValue">
 										<Presentation/>
-										<Value xsi:type="xs:string">Втарой вариант</Value>
+										<Value xsi:type="xs:string">Второй</Value>
 									</xr:Value>
 								</xr:Item>
 								<xr:Item>
 									<xr:Presentation/>
 									<xr:CheckState>0</xr:CheckState>
 									<xr:Value xsi:type="FormChoiceListDesTimeValue">
-										<Presentation>
-											<v8:item>
-												<v8:lang>ru</v8:lang>
-												<v8:content>Третий вариант</v8:content>
-											</v8:item>
-										</Presentation>
-										<Value xsi:type="xs:string">Третый вориант</Value>
+										<Presentation/>
+										<Value xsi:type="xs:string">Третий</Value>
 									</xr:Value>
 								</xr:Item>
 							</ChoiceList>
-							<ContextMenu name="Реквизит6КонтекстноеМеню" id="42"/>
-							<ExtendedTooltip name="Реквизит6РасширеннаяПодсказка" id="43"/>
+							<ContextMenu name="ПереключательБезЗаголовкаКонтекстноеМеню" id="42"/>
+							<ExtendedTooltip name="ПереключательБезЗаголовкаРасширеннаяПодсказка" id="43"/>
 						</RadioButtonField>
-						<CheckBoxField name="Флаг1" id="44">
+						<CheckBoxField name="ФлагБезЗаголовка" id="44">
 							<DataPath>Флаг</DataPath>
 							<Title>
 								<v8:item>
@@ -321,8 +316,8 @@
 							</ToolTip>
 							<ToolTipRepresentation>None</ToolTipRepresentation>
 							<CheckBoxType>Auto</CheckBoxType>
-							<ContextMenu name="Флаг1КонтекстноеМеню" id="45"/>
-							<ExtendedTooltip name="Флаг1РасширеннаяПодсказка" id="46">
+							<ContextMenu name="ФлагБезЗаголовкаКонтекстноеМеню" id="45"/>
+							<ExtendedTooltip name="ФлагБезЗаголовкаРасширеннаяПодсказка" id="46">
 								<Title formatted="false">
 									<v8:item>
 										<v8:lang>ru</v8:lang>

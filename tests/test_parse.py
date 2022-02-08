@@ -8,7 +8,13 @@ from kontur.checkgrammar import parse
 
 @pytest.fixture
 def button():
-    obj = ET.parse('tests/fixture/button.xml')
+    obj = ET.parse("tests/fixture/button.xml")
+    return obj
+
+
+@pytest.fixture
+def page_no_title():
+    obj = ET.parse("tests/fixture/noTitle.xml")
     return obj
 
 
@@ -97,6 +103,20 @@ def test_ChildItemsExtendedTooltip(button):
     assert result["Тест.РасшПодсказка"] == "Это тестовая расширенная подсказка"
 
 
+def test_skipElementsWithoutTitle(page_no_title):
+    result = parse.getChildItems(page_no_title)
+
+    assert result
+
+    check_list = [
+        "ПолеБезЗаголовка.Заголовок",
+        "ФлагБезЗаголовка.Заголовок",
+        "ПереключательБезЗаголовка.Заголовок"]
+
+    for key in check_list:
+
+        assert key not in result
+
 # endregion
 
 
@@ -107,7 +127,7 @@ def test_parseFormWithAutoCommandBar():
     result = parse.parseForm(path)
 
     assert result
-    must_be = [
+    check_list = [
         "КнопкаКоманднойПанели.Заголовок",
         "ГруппаСДекорациями.Заголовок",
         "ГраппаСПолями.Заголовок",
@@ -121,7 +141,7 @@ def test_parseFormWithAutoCommandBar():
         "Флаг.Подсказка",
         "Флаг.РасшПодсказка",
     ]
-    for key in must_be:
+    for key in check_list:
 
         assert key in result
 
@@ -133,7 +153,7 @@ def test_parseFormWithoutAutoCommandBar():
     result = parse.parseForm(path)
 
     assert result
-    must_be = [
+    check_list = [
         "ГруппаСДекорациями.Заголовок",
         "ГраппаСПолями.Заголовок",
         "ГруппаСКнопками.Заголовок",
@@ -146,7 +166,7 @@ def test_parseFormWithoutAutoCommandBar():
         "Флаг.Подсказка",
         "Флаг.РасшПодсказка",
     ]
-    for key in must_be:
+    for key in check_list:
 
         assert key in result
 

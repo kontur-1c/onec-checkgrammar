@@ -80,11 +80,10 @@ def test_multi_src(temp_xml):
 
     assert result.exit_code == 1
 
+
 def test_output_dict(temp_txt):
     runner = CliRunner()
-    result = runner.invoke(
-        cli, ["./tests/fixture/epf_mistakes/", "--output", temp_txt]
-    )
+    result = runner.invoke(cli, ["./tests/fixture/epf_mistakes/", "--output", temp_txt])
 
     assert result.exit_code == 1
     assert os.path.exists(temp_txt)
