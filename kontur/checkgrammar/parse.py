@@ -43,12 +43,21 @@ def getChildItems(obj: Et.Element) -> Dict[str, str]:
         return result
     for element in all_elements:
         name = element.attrib.get("name")
-
+        tag = element.tag[element.tag.find("}") + 1 :]
         title = element.find("logform:Title", namespaces)
         if title is not None:
-            content = getRuContent(title)
-            if content is not None:
-                result[f"{name}.Заголовок"] = content
+            # Проверим виден ли заголовок
+            title_location = element.find("logform:TitleLocation", namespaces)
+            if (
+                tag in ("InputField", "RadioButtonField", "CheckBoxField")
+                and title_location is not None
+                and title_location.text == "None"
+            ):
+                pass
+            else:
+                content = getRuContent(title)
+                if content is not None:
+                    result[f"{name}.Заголовок"] = content
 
         tooltip = element.find("logform:ToolTip", namespaces)
         if tooltip is not None:

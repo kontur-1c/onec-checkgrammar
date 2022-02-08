@@ -233,6 +233,101 @@
 						</InputField>
 					</ChildItems>
 				</Page>
+				<Page name="ГруппаНевидимость" id="36">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа невидимость</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа невидимость</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="ГруппаНевидимостьРасширеннаяПодсказка" id="37"/>
+					<ChildItems>
+						<InputField name="ПолеБезЗаголовка" id="38">
+							<DataPath>Реквизит1</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Ошыбка</v8:content>
+								</v8:item>
+							</Title>
+							<TitleLocation>None</TitleLocation>
+							<ContextMenu name="ПолеБезЗаголовкаКонтекстноеМеню" id="39"/>
+							<ExtendedTooltip name="ПолеБезЗаголовкаРасширеннаяПодсказка" id="40"/>
+						</InputField>
+						<RadioButtonField name="ПереключательБезЗаголовка" id="41">
+							<DataPath>Реквизит3</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Ошыбка</v8:content>
+								</v8:item>
+							</Title>
+							<TitleLocation>None</TitleLocation>
+							<RadioButtonType>Auto</RadioButtonType>
+							<ChoiceList>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation/>
+										<Value xsi:type="xs:string">Первый</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation/>
+										<Value xsi:type="xs:string">Второй</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation/>
+										<Value xsi:type="xs:string">Третий</Value>
+									</xr:Value>
+								</xr:Item>
+							</ChoiceList>
+							<ContextMenu name="ПереключательБезЗаголовкаКонтекстноеМеню" id="42"/>
+							<ExtendedTooltip name="ПереключательБезЗаголовкаРасширеннаяПодсказка" id="43"/>
+						</RadioButtonField>
+						<CheckBoxField name="ФлагБезЗаголовка" id="44">
+							<DataPath>Флаг</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Ошыбка</v8:content>
+								</v8:item>
+							</Title>
+							<TitleLocation>None</TitleLocation>
+							<ToolTip>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Это подсказка</v8:content>
+								</v8:item>
+							</ToolTip>
+							<ToolTipRepresentation>None</ToolTipRepresentation>
+							<CheckBoxType>Auto</CheckBoxType>
+							<ContextMenu name="ФлагБезЗаголовкаКонтекстноеМеню" id="45"/>
+							<ExtendedTooltip name="ФлагБезЗаголовкаРасширеннаяПодсказка" id="46">
+								<Title formatted="false">
+									<v8:item>
+										<v8:lang>ru</v8:lang>
+										<v8:content>Это расширенная подсказка</v8:content>
+									</v8:item>
+								</Title>
+							</ExtendedTooltip>
+						</CheckBoxField>
+					</ChildItems>
+				</Page>
 			</ChildItems>
 		</Pages>
 		<CheckBoxField name="Флаг" id="25">

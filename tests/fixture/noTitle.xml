@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<Page xmlns="http://v8.1c.ru/8.3/xcf/logform"
+	xmlns:v8="http://v8.1c.ru/8.1/data/core"
+	xmlns:xr="http://v8.1c.ru/8.3/xcf/readable"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ГруппаТест" id="1249">
+	<ChildItems>
+		<InputField name="ПолеБезЗаголовка" id="38">
+			<DataPath>Реквизит1</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ошыбка</v8:content>
+				</v8:item>
+			</Title>
+			<TitleLocation>None</TitleLocation>
+			<ContextMenu name="Реквизит5КонтекстноеМеню" id="39"/>
+			<ExtendedTooltip name="Реквизит5РасширеннаяПодсказка" id="40"/>
+		</InputField>
+		<CheckBoxField name="ФлагБезЗаголовка" id="44">
+			<DataPath>Флаг</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ошыбка</v8:content>
+				</v8:item>
+			</Title>
+			<TitleLocation>None</TitleLocation>
+			<ToolTip/>
+			<ToolTipRepresentation>None</ToolTipRepresentation>
+			<CheckBoxType>Auto</CheckBoxType>
+			<ContextMenu name="ФлагБезЗаголовкаКонтекстноеМеню" id="45"/>
+			<ExtendedTooltip name="ФлагБезЗаголовкаРасширеннаяПодсказка" id="46"/>
+		</CheckBoxField>
+		<RadioButtonField name="ПереключательБезЗаголовка" id="41">
+			<DataPath>Реквизит3</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Ошыбка</v8:content>
+				</v8:item>
+			</Title>
+			<TitleLocation>None</TitleLocation>
+			<RadioButtonType>Auto</RadioButtonType>
+			<ChoiceList>
+				<xr:Item>
+					<xr:Presentation/>
+					<xr:CheckState>0</xr:CheckState>
+					<xr:Value xsi:type="FormChoiceListDesTimeValue">
+						<Presentation/>
+						<Value xsi:type="xs:string">Первый</Value>
+					</xr:Value>
+				</xr:Item>
+				<xr:Item>
+					<xr:Presentation/>
+					<xr:CheckState>0</xr:CheckState>
+					<xr:Value xsi:type="FormChoiceListDesTimeValue">
+						<Presentation/>
+						<Value xsi:type="xs:string">Второй</Value>
+					</xr:Value>
+				</xr:Item>
+				<xr:Item>
+					<xr:Presentation/>
+					<xr:CheckState>0</xr:CheckState>
+					<xr:Value xsi:type="FormChoiceListDesTimeValue">
+						<Presentation/>
+						<Value xsi:type="xs:string">Третий</Value>
+					</xr:Value>
+				</xr:Item>
+			</ChoiceList>
+			<ContextMenu name="ПереключательБезЗаголовкаКонтекстноеМеню" id="42"/>
+			<ExtendedTooltip name="ПереключательБезЗаголовкаРасширеннаяПодсказка" id="43"/>
+		</RadioButtonField>
+	</ChildItems>
+</Page>
