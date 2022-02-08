@@ -38,8 +38,6 @@ def getChildItems(obj: Et.Element) -> Dict[str, str]:
         :return: Словарь НазваниеЭлемента.Поле - Текст
     """
     result: Dict[str, str] = {}
-    if obj is None:
-        return result
     all_elements = obj.find("logform:ChildItems", namespaces)
     if all_elements is None:
         return result
