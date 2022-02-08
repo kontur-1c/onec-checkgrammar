@@ -1,0 +1,3 @@
+ignore:
+  - "piefile.py"
+  - "setup.py"
