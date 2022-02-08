@@ -233,6 +233,106 @@
 						</InputField>
 					</ChildItems>
 				</Page>
+				<Page name="ГруппаНевидимость" id="36">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа невидимость</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Группа невидимость</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="ГруппаНевидимостьРасширеннаяПодсказка" id="37"/>
+					<ChildItems>
+						<InputField name="Реквизит5" id="38">
+							<DataPath>Реквизит1</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Ошыбка</v8:content>
+								</v8:item>
+							</Title>
+							<TitleLocation>None</TitleLocation>
+							<ContextMenu name="Реквизит5КонтекстноеМеню" id="39"/>
+							<ExtendedTooltip name="Реквизит5РасширеннаяПодсказка" id="40"/>
+						</InputField>
+						<RadioButtonField name="Реквизит6" id="41">
+							<DataPath>Реквизит3</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Ошыбка</v8:content>
+								</v8:item>
+							</Title>
+							<TitleLocation>None</TitleLocation>
+							<RadioButtonType>Auto</RadioButtonType>
+							<ChoiceList>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation/>
+										<Value xsi:type="xs:string">Первый вариант</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation/>
+										<Value xsi:type="xs:string">Втарой вариант</Value>
+									</xr:Value>
+								</xr:Item>
+								<xr:Item>
+									<xr:Presentation/>
+									<xr:CheckState>0</xr:CheckState>
+									<xr:Value xsi:type="FormChoiceListDesTimeValue">
+										<Presentation>
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>Третий вариант</v8:content>
+											</v8:item>
+										</Presentation>
+										<Value xsi:type="xs:string">Третый вориант</Value>
+									</xr:Value>
+								</xr:Item>
+							</ChoiceList>
+							<ContextMenu name="Реквизит6КонтекстноеМеню" id="42"/>
+							<ExtendedTooltip name="Реквизит6РасширеннаяПодсказка" id="43"/>
+						</RadioButtonField>
+						<CheckBoxField name="Флаг1" id="44">
+							<DataPath>Флаг</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Ошыбка</v8:content>
+								</v8:item>
+							</Title>
+							<TitleLocation>None</TitleLocation>
+							<ToolTip>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Это подсказка</v8:content>
+								</v8:item>
+							</ToolTip>
+							<ToolTipRepresentation>None</ToolTipRepresentation>
+							<CheckBoxType>Auto</CheckBoxType>
+							<ContextMenu name="Флаг1КонтекстноеМеню" id="45"/>
+							<ExtendedTooltip name="Флаг1РасширеннаяПодсказка" id="46">
+								<Title formatted="false">
+									<v8:item>
+										<v8:lang>ru</v8:lang>
+										<v8:content>Это расширенная подсказка</v8:content>
+									</v8:item>
+								</Title>
+							</ExtendedTooltip>
+						</CheckBoxField>
+					</ChildItems>
+				</Page>
 			</ChildItems>
 		</Pages>
 		<CheckBoxField name="Флаг" id="25">
