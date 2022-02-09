@@ -70,6 +70,12 @@ def test_check_ya_speller_no_error_with_dict():
     assert not result, "Найдены ошибки"
 
 
+def test_check_ya_speller_no_error_if_in_suggest():
+    check = GrammarCheck()
+    result = checkYaSpeller("Картинка состояние отчета отправлен")
+    assert not result, "Найдены ошибки"
+
+
 # region Run with errors
 
 
