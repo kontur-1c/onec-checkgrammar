@@ -54,6 +54,8 @@ def getChildItems(obj: Et.Element) -> Dict[str, str]:
                 and title_location.text == "None"
             ):
                 pass
+            elif tag == "PictureDecoration":
+                pass
             else:
                 content = getRuContent(title)
                 if content is not None:

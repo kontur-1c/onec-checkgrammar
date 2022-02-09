@@ -18,6 +18,12 @@ def page_no_title():
     return obj
 
 
+@pytest.fixture
+def picture():
+    obj = ET.parse("tests/fixture/picture.xml")
+    return obj
+
+
 # region Тест получение RU контента
 
 
@@ -111,11 +117,19 @@ def test_skipElementsWithoutTitle(page_no_title):
     check_list = [
         "ПолеБезЗаголовка.Заголовок",
         "ФлагБезЗаголовка.Заголовок",
-        "ПереключательБезЗаголовка.Заголовок"]
+        "ПереключательБезЗаголовка.Заголовок",
+    ]
 
     for key in check_list:
 
         assert key not in result
+
+
+def test_skipPicture(picture):
+    result = parse.getChildItems(picture)
+
+    assert not result
+
 
 # endregion
 
@@ -133,7 +147,6 @@ def test_parseFormWithAutoCommandBar():
         "ГраппаСПолями.Заголовок",
         "ГруппаСКнопками.Заголовок",
         "Надпись.Заголовок",
-        "Картинка.Заголовок",
         "Реквизит1.Заголовок",
         "Реквизит2.Заголовок",
         "Команда1.Заголовок",
@@ -158,7 +171,6 @@ def test_parseFormWithoutAutoCommandBar():
         "ГраппаСПолями.Заголовок",
         "ГруппаСКнопками.Заголовок",
         "Надпись.Заголовок",
-        "Картинка.Заголовок",
         "Реквизит1.Заголовок",
         "Реквизит2.Заголовок",
         "Команда1.Заголовок",
