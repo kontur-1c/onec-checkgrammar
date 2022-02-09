@@ -2,7 +2,7 @@ name: "mutant"
 on:
   push:
     paths:
-      - 'mutant.yml'
+      - '.github/workflows/mutant.yml'
   schedule:
     - cron: '0 1 * * *'
 jobs:
