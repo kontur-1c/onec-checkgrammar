@@ -42,7 +42,11 @@ def checkYaSpeller(text: str, out_dict=tuple()) -> List[GrammarError]:
 
     check = ya_speller.spell(text)
     for res in check:
-        if res["s"] and res["word"].lower() not in out_dict:  # Есть варианты замены
+        if (
+            res["s"]
+            and res["word"].lower() not in out_dict
+            and res["word"].lower() not in res["s"]
+        ):  # Есть варианты замены
             result.append(GrammarError(res["word"], res["s"]))
 
     return result
