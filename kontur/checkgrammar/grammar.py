@@ -164,7 +164,6 @@ class GrammarCheck:
                 test_case = junit_xml.TestCase(
                     data.element,
                     classname=obj,
-                    allow_multiple_subelements=True,
                     stderr=f"Возможно опечатка в тексте: {data.text}",
                 )
 
@@ -175,7 +174,7 @@ class GrammarCheck:
             ts.append(junit_xml.TestSuite(obj, test_cases))
 
         with open(full_path, "w", encoding="utf-8") as f:
-            junit_xml.to_xml_report_file(f, ts, encoding="utf-8")
+            junit_xml.TestSuite.to_file(f, ts, encoding="utf-8")
 
     def print(self):
         """

@@ -14,7 +14,7 @@ author = "a.krapivin"
 email = "krapivin_andrey@mail.ru"
 url = "https://github.com/kontur-1c/onec-grammarcheck"
 
-requires = ["pyaspeller", "Click", "junit-xml", "wasabi", "tqdm"]
+requires = ["pyaspeller", "Click", "junit-xml=1.8", "wasabi", "tqdm"]
 requires_test = ["pytest", "pytest-cov", "pytest-runner", "pytest-click"]
 requires_dev = requires_test + ["black", "flake8"]
 
