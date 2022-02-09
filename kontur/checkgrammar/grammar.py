@@ -31,9 +31,6 @@ class GrammarError:
     def __str__(self):
         return f"{self.word} -> {self.variants}"
 
-    def __repr__(self):
-        return str(self)
-
 
 @lru_cache(maxsize=2048)
 def checkYaSpeller(text: str, out_dict=tuple()) -> List[GrammarError]:

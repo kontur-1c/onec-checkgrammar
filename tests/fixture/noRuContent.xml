@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ButtonGroup xmlns:v8="http://v8.1c.ru/8.1/data/core"
+    xmlns="http://v8.1c.ru/8.3/xcf/logform" name="ГруппаТест" id="1249">
+    <ChildItems>
+        <PictureDecoration name="Картинка" id="14">
+            <Title formatted="false">
+			    <v8:item>
+				    <v8:lang>ru</v8:lang>
+					<v8:content>Это картинка</v8:content>
+                </v8:item>
+            </Title>
+			<ContextMenu name="КартинкаКонтекстноеМеню" id="15"/>
+			<ExtendedTooltip name="КартинкаРасширеннаяПодсказка" id="16"/>
+		</PictureDecoration>
+    </ChildItems>
+</ButtonGroup>

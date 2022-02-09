@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Title xmlns:v8="http://v8.1c.ru/8.1/data/core">
+    <v8:item>
+        <v8:lang>ru</v8:lang>
+        <v8:content>Тест</v8:content>
+    </v8:item>
+    <v8:item>
+        <v8:lang>en</v8:lang>
+        <v8:content>Test</v8:content>
+    </v8:item>
+</Title>
