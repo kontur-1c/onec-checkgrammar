@@ -24,43 +24,39 @@ def picture():
     return obj
 
 
+@pytest.fixture
+def empty():
+    obj = ET.parse("tests/fixture/empty.xml")
+    return obj
+
+
+@pytest.fixture
+def ru_content():
+    obj = ET.parse("tests/fixture/ruContent.xml")
+    return obj
+
+
+@pytest.fixture
+def no_ru_content():
+    obj = ET.parse("tests/fixture/noRuContent.xml")
+    return obj
+
+
 # region Тест получение RU контента
 
 
-def test_GetRuContentNone():
+def test_get_ru_content_none():
     result = parse.getRuContent(None)
     assert result is None, "None должен возвращать None"
 
 
-def test_GetRuContentRu():
-    data = """<?xml version="1.0"?>
-    <Title xmlns:v8="http://v8.1c.ru/8.1/data/core">
-        <v8:item>
-            <v8:lang>ru</v8:lang>
-            <v8:content>Тест</v8:content>
-        </v8:item>
-        <v8:item>
-            <v8:lang>en</v8:lang>
-            <v8:content>Test</v8:content>
-        </v8:item>
-    </Title>
-    """
-    obj = ET.fromstring(data)
-    result = parse.getRuContent(obj)
+def test_get_ru_content_ru(ru_content):
+    result = parse.getRuContent(ru_content)
     assert result == "Тест", "Должен получить секцию RU строки"
 
 
-def test_GetRuContentNoRu():
-    data = """<?xml version="1.0"?>
-        <Title xmlns:v8="http://v8.1c.ru/8.1/data/core">
-            <v8:item>
-                <v8:lang>en</v8:lang>
-                <v8:content>Test</v8:content>
-            </v8:item>
-        </Title>
-        """
-    obj = ET.fromstring(data)
-    result = parse.getRuContent(obj)
+def test_get_ru_content_no_ru(no_ru_content):
+    result = parse.getRuContent(no_ru_content)
     assert result is None, "RU секции нет"
 
 
@@ -69,17 +65,17 @@ def test_GetRuContentNoRu():
 # region Тест разбора элементов формы
 
 
-def test_NoChildItems():
-    data = """<?xml version="1.0"?>
-    <ButtonGroup xmlns:v8="http://v8.1c.ru/8.1/data/core" name="ГруппаКнопокЗагрузитьФичи" id="1249">
-    </ButtonGroup>
-    """
-    obj = ET.fromstring(data)
-    result = parse.getChildItems(obj)
+def test_none_child_items():
+    result = parse.getChildItems(None)
     assert not result
 
 
-def test_ChildItemsTitle(button):
+def test_no_child_items(empty):
+    result = parse.getChildItems(empty)
+    assert not result
+
+
+def test_child_items_title(button):
 
     result = parse.getChildItems(button)
 
@@ -89,7 +85,7 @@ def test_ChildItemsTitle(button):
     assert result["Тест.Заголовок"] == "Тестовая кнопка"
 
 
-def test_ChildItemsTooltip(button):
+def test_child_items_tooltip(button):
 
     result = parse.getChildItems(button)
 
@@ -99,7 +95,7 @@ def test_ChildItemsTooltip(button):
     assert result["Тест.Подсказка"] == "Это тестовая подсказка"
 
 
-def test_ChildItemsExtendedTooltip(button):
+def test_child_items_extended_tooltip(button):
 
     result = parse.getChildItems(button)
 
@@ -109,7 +105,7 @@ def test_ChildItemsExtendedTooltip(button):
     assert result["Тест.РасшПодсказка"] == "Это тестовая расширенная подсказка"
 
 
-def test_skipElementsWithoutTitle(page_no_title):
+def test_skip_elements_without_title(page_no_title):
     result = parse.getChildItems(page_no_title)
 
     assert result
@@ -125,7 +121,7 @@ def test_skipElementsWithoutTitle(page_no_title):
         assert key not in result
 
 
-def test_skipPicture(picture):
+def test_skip_picture(picture):
     result = parse.getChildItems(picture)
 
     assert not result
@@ -134,7 +130,10 @@ def test_skipPicture(picture):
 # endregion
 
 
-def test_parseFormWithAutoCommandBar():
+# region Тест разбора больших объектов: обработок, конфигурации
+
+
+def test_parse_form_with_auto_commandbar():
     path = os.path.abspath(
         "tests/fixture/epf_mistakes/ТестоваяОбработка/Forms/Форма/Ext/Form.xml"
     )
@@ -159,7 +158,7 @@ def test_parseFormWithAutoCommandBar():
         assert key in result
 
 
-def test_parseFormWithoutAutoCommandBar():
+def test_parse_form_without_auto_commandbar():
     path = os.path.abspath(
         "tests/fixture/epf_right/ТестоваяОбработка/Forms/Форма/Ext/Form.xml"
     )
@@ -183,9 +182,12 @@ def test_parseFormWithoutAutoCommandBar():
         assert key in result
 
 
-def test_parseSrc():
+def test_parse_src():
     path = os.path.abspath("tests/fixture/epf_mistakes/")
     result = parse.parseSrc(path)
 
     assert result
     assert "ТестоваяОбработка.Форма" in result
+
+
+# endregion
