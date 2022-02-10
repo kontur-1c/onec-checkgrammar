@@ -22,6 +22,8 @@ jobs:
       - name: Kill all mutants!!
         run: |
           mutmut run
+      - name: Create report
+        run: |
           mutmut results
           mutmut junitxml --suspicious-policy=failure --untested-policy=skipped >> junit.xml
       - name: Publish Test Report
