@@ -1,0 +1,39 @@
+name: "mutant"
+on:
+  push:
+    paths:
+      - '.github/workflows/mutant.yml'
+  schedule:
+    - cron: '0 1 * * *'
+jobs:
+  mutagen:
+    name: Mutagen
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install mutmut
+      - name: Kill all mutants!!
+        run: |
+          mutmut run
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: mutmut-cache
+          path: .mutmut-cache
+          retention-days: 1
+      - name: Create report
+        if: always()
+        run: mutmut junitxml --suspicious-policy=failure --untested-policy=skipped>>mutmut-junit.xml
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v2
+        if: always()
+        with:
+          report_paths: 'mutmut-junit.xml'
