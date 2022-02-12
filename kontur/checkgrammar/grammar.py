@@ -4,6 +4,7 @@ import re
 from datetime import datetime
 from functools import lru_cache
 from typing import List
+import time
 
 import junit_xml
 from pyaspeller import YandexSpeller
@@ -204,6 +205,12 @@ class GrammarCheck:
         with open(full_path, "w", encoding="utf-8") as f:
             for s in result:
                 f.write(s + "\n")
+            timeout = 30
+            while not os.path.exists(full_path):
+                time.sleep(1)
+                timeout -= 1
+                if timeout == 0:
+                    print('Не удалось сохранить файл')
 
     @property
     def has_errors(self) -> bool:
