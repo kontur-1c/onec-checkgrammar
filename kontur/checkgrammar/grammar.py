@@ -1,10 +1,10 @@
 import json
 import os
 import re
+import time
 from datetime import datetime
 from functools import lru_cache
 from typing import List
-import time
 
 import junit_xml
 from pyaspeller import YandexSpeller
