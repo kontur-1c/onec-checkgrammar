@@ -210,7 +210,7 @@ class GrammarCheck:
                 time.sleep(1)
                 timeout -= 1
                 if timeout == 0:
-                    print('Не удалось сохранить файл')
+                    print("Не удалось сохранить файл")
 
     @property
     def has_errors(self) -> bool:
