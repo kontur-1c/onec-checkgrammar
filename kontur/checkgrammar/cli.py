@@ -30,7 +30,7 @@ from kontur.checkgrammar.grammar import GrammarCheck
 @click.option("--output", "-o", "output", default=None, help="Файл для ошибок")
 @click.option(
     "--skip",
-    "-s",
+    "-skip",
     "skip_pattern",
     default=None,
     help="Паттерн имени файла(glob), чтобы пропускать формы",

@@ -34,7 +34,7 @@ class GrammarError:
 
 
 @lru_cache(maxsize=2048)
-def checkYaSpeller(text: str, out_dict=tuple()) -> List[GrammarError]:
+def checkYaSpeller(text: str, our_dict=tuple()) -> List[GrammarError]:
     # Подготовить текст. Спеллер плохо проверяет слова с цифрами
     result = []
 
@@ -42,7 +42,7 @@ def checkYaSpeller(text: str, out_dict=tuple()) -> List[GrammarError]:
     for res in check:
         if (
             res["s"]
-            and res["word"].lower() not in out_dict
+            and res["word"].lower() not in our_dict
             and res["word"].lower() not in res["s"]
         ):  # Есть варианты замены
             result.append(GrammarError(res["word"], res["s"]))
@@ -158,10 +158,10 @@ class GrammarCheck:
 
         self._result = result
 
-    def dump_junit(self, path_to_xml):
+    def dump_junit(self, path_to_xml: str):
         """
         Формирует отчет в формате JUnit
-                :param path_to_xml: Путь до выгружаемого отчета
+            :param path_to_xml: Путь до выгружаемого отчета
         """
 
         assert self._result is not None, "Проверка еще не была выполнена"
@@ -200,10 +200,10 @@ class GrammarCheck:
                 for error in data.errors:
                     msg.fail(error)
 
-    def dump_dict(self, path):
+    def dump_dict(self, path: str):
         """
         Выгрузка отчета в файл. Чтобы было проще готовить файл исключений
-        :param path: путь для выгрузки отчета
+            :param path: путь для выгрузки отчета
         """
         full_path = os.path.abspath(path)
         result = set()
