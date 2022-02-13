@@ -27,8 +27,8 @@ from kontur.checkgrammar.grammar import GrammarCheck
 @click.option("--junit", "-j", "junit", default=None, help="Файл отчета в формате junit")
 @click.option("--output", "-o", "output", default=None, help="Файл для ошибок")
 @click.option(
-    "--skip-pattern",
-    "-skip",
+    "--skip",
+    "-s",
     "skip_pattern",
     default=None,
     help="Паттерн имени файла(glob), чтобы пропускать формы",
@@ -46,6 +46,9 @@ def cli(src, skip_pattern, dictionary, bsl, junit, output, dry_run):
 
     if bsl:
         check.update_dict_from_bsl(bsl)
+
+    if skip_pattern:
+        check.add_skip_pattern(skip_pattern)
 
     for s in src:
         check.add_src(s)

@@ -24,6 +24,17 @@ def test_error():
 
     assert result.exit_code == 1
     assert "Обнаружены ошибки" in result.output
+    assert "ТестоваяОбработка.Форма" in result.output
+
+
+def test_skip():
+    runner = CliRunner()
+    result = runner.invoke(cli, ["--skip", "Тест_*", "./tests/fixture/epf_mistakes/"])
+
+    assert result.exit_code == 1
+    assert "Обнаружены ошибки" in result.output
+    assert "ТестоваяОбработка.Форма" in result.output
+    assert "ТестоваяОбработка.Тест_Форма" not in result.output
 
 
 def test_no_error():
