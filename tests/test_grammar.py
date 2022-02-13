@@ -1,45 +1,4 @@
-import pytest
-
 from kontur.checkgrammar.grammar import GrammarCheck, checkYaSpeller
-
-# region fixtures
-
-
-@pytest.fixture
-def temp_xml(tmpdir_factory):
-    fn = tmpdir_factory.mktemp("data").join("junit.xml")
-    return fn
-
-
-@pytest.fixture
-def temp_txt(tmpdir_factory):
-    fn = tmpdir_factory.mktemp("data").join("output.txt")
-    return fn
-
-
-@pytest.fixture
-def check_errors():
-    check = GrammarCheck()
-    check.update_dict_from_file("tests/fixture/dictionary/dict.txt")
-    check.add_src("tests/fixture/epf_mistakes/")
-
-    check.run()
-
-    return check
-
-
-@pytest.fixture
-def check_no_errors():
-    check = GrammarCheck()
-    check.update_dict_from_file("tests/fixture/dictionary/dict.txt")
-    check.add_src("tests/fixture/epf_right/")
-
-    check.run()
-
-    return check
-
-
-# endregion
 
 
 class TestGetDictionary:

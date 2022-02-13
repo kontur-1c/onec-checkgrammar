@@ -1,26 +1,8 @@
 import os
 
-import pytest
 from click.testing import CliRunner
 
 from kontur.checkgrammar.cli import cli
-
-# region fixtures
-
-
-@pytest.fixture
-def temp_xml(tmpdir_factory):
-    fn = tmpdir_factory.mktemp("data").join("junit.xml")
-    return fn
-
-
-@pytest.fixture
-def temp_txt(tmpdir_factory):
-    fn = tmpdir_factory.mktemp("data").join("output.txt")
-    return fn
-
-
-# endregion
 
 
 class TestSrcOption:
