@@ -109,27 +109,11 @@ class TestDumpResults:
         for x in must_be:
             assert x in captured.out
 
-    def test_print(self, check_errors, capsys):
-        check_errors.print()
-        captured = capsys.readouterr()
-        must_be = [
-            "ОбработкаСОшибками.Форма",
-            "ГраппаСПолями.Заголовок",
-            "Реквизит2.Заголовок",
-        ]
-        for x in must_be:
-            assert x in captured.out
-
     def test_dump_junit_no_errors(self, check_no_errors, temp_xml):
         check_no_errors.dump_junit(temp_xml)
         with open(temp_xml, "r", encoding="utf-8") as f:
             xml = f.read()
             assert xml == '<?xml version="1.0" encoding="utf-8"?>\n<testsuites/>\n'
-
-    def test_print_no_errors(self, check_no_errors, capsys):
-        check_no_errors.print()
-        captured = capsys.readouterr()
-        assert "" in captured.out
 
     def test_dump_txt_no_errors(self, check_no_errors, temp_txt):
         check_no_errors.dump_dict(temp_txt)
@@ -137,3 +121,8 @@ class TestDumpResults:
             output = [x.strip() for x in f.readlines()]
 
         assert not output
+
+    def test_print_no_errors(self, check_no_errors, capsys):
+        check_no_errors.print()
+        captured = capsys.readouterr()
+        assert "" in captured.out

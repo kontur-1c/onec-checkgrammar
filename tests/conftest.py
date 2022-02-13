@@ -53,7 +53,7 @@ def no_ru_content():
     return obj
 
 
-@pytest.fixture
+@pytest.fixture(scope="class")
 def check_errors():
     check = GrammarCheck()
     check.update_dict_from_file("tests/fixture/dictionary/dict.txt")
@@ -64,7 +64,7 @@ def check_errors():
     return check
 
 
-@pytest.fixture
+@pytest.fixture(scope="class")
 def check_no_errors():
     check = GrammarCheck()
     check.update_dict_from_file("tests/fixture/dictionary/dict.txt")
