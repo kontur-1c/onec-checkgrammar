@@ -132,16 +132,12 @@ class TestDumpResults:
             for x in must_be:
                 assert x in xml
 
-    def test_print(self, check_errors, capsys):
-        check_errors.print()
-        captured = capsys.readouterr()
-        must_be = [
-            "ОбработкаСОшибками.Форма",
-            "ГраппаСПолями.Заголовок",
-            "Реквизит2.Заголовок",
-        ]
-        for x in must_be:
-            assert x in captured.out
+    def test_dump_txt(self, check_errors, temp_txt):
+        check_errors.dump_dict(temp_txt)
+        with open(temp_txt, "r", encoding="utf-8") as f:
+            output = [x.strip() for x in f.readlines()]
+
+        assert "граппа" in output
 
     def test_print(self, check_errors, capsys):
         check_errors.print()
@@ -154,13 +150,31 @@ class TestDumpResults:
         for x in must_be:
             assert x in captured.out
 
-    def test_dump_junit_no_error(self, check_no_errors, temp_xml):
+    def test_print(self, check_errors, capsys):
+        check_errors.print()
+        captured = capsys.readouterr()
+        must_be = [
+            "ОбработкаСОшибками.Форма",
+            "ГраппаСПолями.Заголовок",
+            "Реквизит2.Заголовок",
+        ]
+        for x in must_be:
+            assert x in captured.out
+
+    def test_dump_junit_no_errors(self, check_no_errors, temp_xml):
         check_no_errors.dump_junit(temp_xml)
         with open(temp_xml, "r", encoding="utf-8") as f:
             xml = f.read()
             assert xml == '<?xml version="1.0" encoding="utf-8"?>\n<testsuites/>\n'
 
-    def test_print_no_error(self, check_no_errors, capsys):
+    def test_print_no_errors(self, check_no_errors, capsys):
         check_no_errors.print()
         captured = capsys.readouterr()
         assert "" in captured.out
+
+    def test_dump_txt_no_errors(self, check_no_errors, temp_txt):
+        check_no_errors.dump_dict(temp_txt)
+        with open(temp_txt, "r", encoding="utf-8") as f:
+            output = [x.strip() for x in f.readlines()]
+
+        assert not output
