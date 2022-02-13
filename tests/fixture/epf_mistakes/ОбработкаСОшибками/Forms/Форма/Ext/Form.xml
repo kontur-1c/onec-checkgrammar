@@ -360,7 +360,7 @@
 	<Attributes>
 		<Attribute name="Объект" id="1">
 			<Type>
-				<v8:Type>cfg:ExternalDataProcessorObject.ТестоваяОбработка</v8:Type>
+				<v8:Type>cfg:ExternalDataProcessorObject.ОбработкаСОшибками</v8:Type>
 			</Type>
 			<MainAttribute>true</MainAttribute>
 		</Attribute>

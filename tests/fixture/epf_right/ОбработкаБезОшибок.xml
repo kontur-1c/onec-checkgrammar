@@ -6,13 +6,13 @@
 				<xr:ClassId>c3831ec8-d8d5-4f93-8a22-f9bfae07327f</xr:ClassId>
 				<xr:ObjectId>2de0be91-031e-4ed1-9135-c34781f5ad3e</xr:ObjectId>
 			</xr:ContainedObject>
-			<xr:GeneratedType name="ExternalDataProcessorObject.ТестоваяОбработка" category="Object">
+			<xr:GeneratedType name="ExternalDataProcessorObject.ОбработкаБезОшибок" category="Object">
 				<xr:TypeId>cee2b185-2bc7-4e75-865d-aec3d9675b8a</xr:TypeId>
 				<xr:ValueId>b54ff5d7-e6b5-40ca-9ad7-870e064a8c95</xr:ValueId>
 			</xr:GeneratedType>
 		</InternalInfo>
 		<Properties>
-			<Name>ТестоваяОбработка</Name>
+			<Name>ОбработкаБезОшибок</Name>
 			<Synonym>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
@@ -20,12 +20,11 @@
 				</v8:item>
 			</Synonym>
 			<Comment/>
-			<DefaultForm>ExternalDataProcessor.ТестоваяОбработка.Form.Форма</DefaultForm>
+			<DefaultForm>ExternalDataProcessor.ОбработкаБезОшибок.Form.Форма</DefaultForm>
 			<AuxiliaryForm/>
 		</Properties>
 		<ChildObjects>
 			<Form>Форма</Form>
-			<Form>Тест_Форма</Form>
 		</ChildObjects>
 	</ExternalDataProcessor>
 </MetaDataObject>
