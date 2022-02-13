@@ -135,7 +135,7 @@ def test_skip_picture(picture):
 
 def test_parse_form_with_auto_commandbar():
     path = os.path.abspath(
-        "tests/fixture/epf_mistakes/ТестоваяОбработка/Forms/Форма/Ext/Form.xml"
+        "tests/fixture/epf_mistakes/ОбработкаСОшибками/Forms/Форма/Ext/Form.xml"
     )
     result = parse.parseForm(path)
 
@@ -160,7 +160,7 @@ def test_parse_form_with_auto_commandbar():
 
 def test_parse_form_without_auto_commandbar():
     path = os.path.abspath(
-        "tests/fixture/epf_right/ТестоваяОбработка/Forms/Форма/Ext/Form.xml"
+        "tests/fixture/epf_right/ОбработкаСОшибками/Forms/Форма/Ext/Form.xml"
     )
     result = parse.parseForm(path)
 
@@ -187,7 +187,7 @@ def test_parse_src():
     result = parse.parseSrc(path)
 
     assert result
-    assert "ТестоваяОбработка.Форма" in result
+    assert "ОбработкаСОшибками.Форма" in result
 
 
 def test_parse_and_exclude_src():
@@ -195,7 +195,7 @@ def test_parse_and_exclude_src():
     result = parse.parseSrc(path, "[!Тест_*]*")
 
     assert result
-    assert "ТестоваяОбработка.Форма" in result
-    assert "ТестоваяОбработка.Тест_Форма" not in result
+    assert "ОбработкаСОшибками.Форма" in result
+    assert "ОбработкаСОшибками.Тест_Форма" not in result
 
 # endregion

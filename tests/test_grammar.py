@@ -80,9 +80,9 @@ def test_check_ya_speller_no_error_if_in_suggest():
 
 def test_run(check_errors):
     assert check_errors._result
-    assert "ТестоваяОбработка.Форма" in check_errors._result
+    assert "ОбработкаСОшибками.Форма" in check_errors._result
 
-    elements = check_errors._result["ТестоваяОбработка.Форма"]
+    elements = check_errors._result["ОбработкаСОшибками.Форма"]
 
     assert len(elements) == 5
 
@@ -108,7 +108,7 @@ def test_print(check_errors, capsys):
     check_errors.print()
     captured = capsys.readouterr()
     must_be = [
-        "ТестоваяОбработка.Форма",
+        "ОбработкаСОшибками.Форма",
         "ГраппаСПолями.Заголовок",
         "Реквизит2.Заголовок",
     ]

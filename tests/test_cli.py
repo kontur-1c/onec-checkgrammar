@@ -32,7 +32,7 @@ def test_error():
 
     assert result.exit_code == 1
     assert "Обнаружены ошибки" in result.output
-    assert "ТестоваяОбработка.Форма" in result.output
+    assert "ОбработкаСОшибками.Форма" in result.output
 
 
 def test_skip():
@@ -41,8 +41,8 @@ def test_skip():
 
     assert result.exit_code == 1
     assert "Обнаружены ошибки" in result.output
-    assert "ТестоваяОбработка.Форма" in result.output
-    assert "ТестоваяОбработка.Тест_Форма" not in result.output
+    assert "ОбработкаСОшибками.Форма" in result.output
+    assert "ОбработкаСОшибками.Тест_Форма" not in result.output
 
 
 def test_no_error():
