@@ -24,7 +24,9 @@ from kontur.checkgrammar.grammar import GrammarCheck
     help="Получить словарь из настроек bsl-language-server.json",
 )
 @click.option("--dry-run", "dry_run", is_flag=True, help="Не ронять тесты")
-@click.option("--junit", "-j", "junit", default=None, help="Файл отчета в формате junit")
+@click.option(
+    "--junit", "-j", "junit", default=None, help="Файл отчета в формате junit"
+)
 @click.option("--output", "-o", "output", default=None, help="Файл для ошибок")
 @click.option(
     "--skip",
@@ -39,6 +41,10 @@ def cli(src, skip_pattern, dictionary, bsl, junit, output, dry_run):
     SRC каталог исходников конфигурации или внешней обработки/отчета.
 
     Можно указать несколько через пробел"""
+
+    if not src:
+        print("Необходимо указать каталоги для проверки", file=sys.stderr)
+        sys.exit(1)
 
     check = GrammarCheck()
     for d in dictionary:

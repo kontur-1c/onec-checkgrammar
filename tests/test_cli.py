@@ -18,6 +18,14 @@ def temp_txt(tmpdir_factory):
     return fn
 
 
+def test_empty_src():
+    runner = CliRunner()
+    result = runner.invoke(cli, [""])
+
+    assert result.exit_code == 1
+    assert "Необходимо указать каталоги для проверки" in result.output
+
+
 def test_error():
     runner = CliRunner()
     result = runner.invoke(cli, ["./tests/fixture/epf_mistakes/"])
