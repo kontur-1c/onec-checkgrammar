@@ -20,7 +20,7 @@ def temp_txt(tmpdir_factory):
 
 def test_empty_src():
     runner = CliRunner()
-    result = runner.invoke(cli, [""])
+    result = runner.invoke(cli, ["-o", "output.txt"])
 
     assert result.exit_code == 1
     assert "Необходимо указать каталоги для проверки" in result.output
