@@ -190,4 +190,12 @@ def test_parse_src():
     assert "ТестоваяОбработка.Форма" in result
 
 
+def test_parse_and_exclude_src():
+    path = os.path.abspath("tests/fixture/epf_mistakes/")
+    result = parse.parseSrc(path, "[!Тест_*]*")
+
+    assert result
+    assert "ТестоваяОбработка.Форма" in result
+    assert "ТестоваяОбработка.Тест_Форма" not in result
+
 # endregion

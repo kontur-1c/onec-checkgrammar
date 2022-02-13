@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import time
 from datetime import datetime
 from functools import lru_cache
 from typing import List
@@ -55,6 +56,7 @@ class GrammarCheck:
         self._src = []
         self._dict = []
         self._result = None
+        self._skip = ""
 
     def update_dict_from_file(self, path_to_dict: str):
         """
@@ -106,6 +108,15 @@ class GrammarCheck:
 
         self._src.append(src)
 
+    def add_skip_pattern(self, pattern: str):
+        """
+        Добавить паттерн для исключения некоторых форм
+
+        :param pattern: паттерн в формате glob
+        """
+        assert pattern, "Паттерн не должен быть пустым"
+        self._skip = f"[!{pattern}]"
+
     def run(self):
         """
         Запуск проверки орфографии
@@ -117,7 +128,7 @@ class GrammarCheck:
 
         start_time = datetime.now()
         for src in self._src:
-            objects = parse.parseSrc(src)
+            objects = parse.parseSrc(src, self._skip)
 
             for obj, elements in objects.items():
                 if len(self._src) == 1:
@@ -204,6 +215,12 @@ class GrammarCheck:
         with open(full_path, "w", encoding="utf-8") as f:
             for s in result:
                 f.write(s + "\n")
+            timeout = 30
+            while not os.path.exists(full_path):
+                time.sleep(1)
+                timeout -= 1
+                if timeout == 0:
+                    print("Не удалось сохранить файл")
 
     @property
     def has_errors(self) -> bool:

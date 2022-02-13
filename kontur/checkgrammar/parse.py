@@ -112,14 +112,17 @@ def parseForm(path_to_form: str) -> Dict[str, str]:
     return dict(elements, **buttons)
 
 
-def parseSrc(path_to_src) -> Dict[str, Dict[str, str]]:
+def parseSrc(path_to_src: str, skip_pattern="") -> Dict[str, Dict[str, str]]:
     """
     Разбор каталога исходников на формы и элементы
         :param path_to_src: путь до каталога исходников
+        :param skip_pattern: паттерн для пропуска форм
         :return: dict с формами и элементами
     """
     full_path = os.path.abspath(path_to_src)
-    files = glob.glob(f"{full_path}/**/Forms/*/Ext/Form.xml", recursive=True)
+    files = glob.glob(
+        f"{full_path}/**/Forms/{skip_pattern}*/Ext/Form.xml", recursive=True
+    )
     result: Dict[str, Dict[str, str]] = {}
     for form_file in files:
         temp = form_file.split(os.path.sep)

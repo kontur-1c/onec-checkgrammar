@@ -18,12 +18,31 @@ def temp_txt(tmpdir_factory):
     return fn
 
 
+def test_empty_src():
+    runner = CliRunner()
+    result = runner.invoke(cli, ["-o", "output.txt"])
+
+    assert result.exit_code == 1
+    assert "Необходимо указать каталоги для проверки" in result.output
+
+
 def test_error():
     runner = CliRunner()
     result = runner.invoke(cli, ["./tests/fixture/epf_mistakes/"])
 
     assert result.exit_code == 1
     assert "Обнаружены ошибки" in result.output
+    assert "ТестоваяОбработка.Форма" in result.output
+
+
+def test_skip():
+    runner = CliRunner()
+    result = runner.invoke(cli, ["--skip", "Тест_*", "./tests/fixture/epf_mistakes/"])
+
+    assert result.exit_code == 1
+    assert "Обнаружены ошибки" in result.output
+    assert "ТестоваяОбработка.Форма" in result.output
+    assert "ТестоваяОбработка.Тест_Форма" not in result.output
 
 
 def test_no_error():
