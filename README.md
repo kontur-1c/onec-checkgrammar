@@ -41,11 +41,27 @@ onec-checkgrammar ./src
 onec-checkgrammar ./src1 ./src2
 ```
 
+### Исключение форм из проверки
+
+```bash
+onec-checkgrammar --skip Тест_* ./src1 
+```
+
+Исключит все формы начинающиеся с префикса "Тест_". Подробнее: документация glob
+
 ### Результат проверки в формате JUnit 
 
 ```bash
-onec-checkgrammar ./src --junit junit.xml
+onec-checkgrammar --junit junit.xml ./src
 ```
+
+### Результат проверки в отдельный файл
+
+```bash
+onec-checkgrammar --output temp.txt ./src
+```
+
+В файл будут добавлены все слова с ошибками. Удобно подготовить файл словаря исключений
 
 ### Словари исключений
 
@@ -54,7 +70,7 @@ onec-checkgrammar ./src --junit junit.xml
 #### Явное указание
 
 ```bash
-onec-checkgrammar ./src --dict dict.txt
+onec-checkgrammar --dict dict.txt ./src
 ```
 
 Слова должны быть разделены переносом строк
@@ -62,7 +78,7 @@ onec-checkgrammar ./src --dict dict.txt
 Можно указать несколько словарей
 
 ```bash
-onec-checkgrammar ./src --dict dict1.txt --dict dict2.txt
+onec-checkgrammar --dict dict1.txt --dict dict2.txt ./src
 ```
 
 #### Настройки BSL language server
@@ -70,16 +86,13 @@ onec-checkgrammar ./src --dict dict1.txt --dict dict2.txt
 Если у Вас в настройках указаны исключения для опечаток, можно использовать их повторно
 
 ```bash
-onec-checkgrammar ./src -bsl
+onec-checkgrammar --bsl-settings --dict dict1.txt ./src
 ```
 
 Будут взяты настройки из файла *.bsl-language-server.json*
 
 ```bash
-onec-checkgrammar ./src -bsl /my-bsl.json
+onec-checkgrammar -bsl /my-bsl.json ./src
 ```
 
 Явное указание файла настроек
-
-
-
