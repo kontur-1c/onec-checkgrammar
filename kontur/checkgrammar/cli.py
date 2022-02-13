@@ -8,25 +8,32 @@ from kontur.checkgrammar.grammar import GrammarCheck
 @click.command()
 @click.argument("src", envvar="SRC", nargs=-1)
 @click.option(
-    "-d",
     "--dict",
+    "-d",
     "dictionary",
     default=None,
     multiple=True,
     help="Словари исключений из проверки",
 )
 @click.option(
-    "-bsl",
     "--bsl-settings",
+    "-bsl",
     "bsl",
     is_flag=False,
     flag_value=".bsl-language-server.json",
     help="Получить словарь из настроек bsl-language-server.json",
 )
 @click.option("--dry-run", "dry_run", is_flag=True, help="Не ронять тесты")
-@click.option("--junit", "junit", default=None, help="Файл отчета в формате junit")
-@click.option("--output", "output", default=None, help="Файл для ошибок")
-def cli(src, dictionary, bsl, junit, output, dry_run):
+@click.option("--junit", "-j", "junit", default=None, help="Файл отчета в формате junit")
+@click.option("--output", "-o", "output", default=None, help="Файл для ошибок")
+@click.option(
+    "--skip-pattern",
+    "-skip",
+    "skip_pattern",
+    default=None,
+    help="Паттерн имени файла(glob), чтобы пропускать формы",
+)
+def cli(src, skip_pattern, dictionary, bsl, junit, output, dry_run):
     """Проверка орфографии элементов форм в каталоге SRC.
 
     SRC каталог исходников конфигурации или внешней обработки/отчета.

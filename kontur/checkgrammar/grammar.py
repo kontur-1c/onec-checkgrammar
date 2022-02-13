@@ -56,6 +56,7 @@ class GrammarCheck:
         self._src = []
         self._dict = []
         self._result = None
+        self._skip = ""
 
     def update_dict_from_file(self, path_to_dict: str):
         """
@@ -107,6 +108,15 @@ class GrammarCheck:
 
         self._src.append(src)
 
+    def add_skip_pattern(self, pattern: str):
+        """
+        Добавить паттерн для исключения некоторых форм
+
+        :param pattern: паттерн в формате glob
+        """
+        assert pattern, "Паттерн не должен быть пустым"
+        self._skip = f"[!{pattern}]"
+
     def run(self):
         """
         Запуск проверки орфографии
@@ -118,7 +128,7 @@ class GrammarCheck:
 
         start_time = datetime.now()
         for src in self._src:
-            objects = parse.parseSrc(src)
+            objects = parse.parseSrc(src, self._skip)
 
             for obj, elements in objects.items():
                 if len(self._src) == 1:
