@@ -46,3 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Исправлено
 - ожидание создания файла при использовании **--output**
+
+## [0.4.1]
+
+### Исправлено
+- ошибка yaspeller если проверяется строка без кириллицы
