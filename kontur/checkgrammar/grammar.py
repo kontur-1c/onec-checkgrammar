@@ -33,10 +33,16 @@ class GrammarError:
         return f"{self.word} -> {self.variants}"
 
 
+def has_cyrillic(text):
+    return bool(re.search("[а-яА-Я]", text))
+
+
 @lru_cache(maxsize=2048)
 def checkYaSpeller(text: str, our_dict=tuple()) -> List[GrammarError]:
     # Подготовить текст. Спеллер плохо проверяет слова с цифрами
-    result = []
+    result: List[GrammarError] = []
+    if not has_cyrillic(text):
+        return result
 
     check = ya_speller.spell(text)
     for res in check:
