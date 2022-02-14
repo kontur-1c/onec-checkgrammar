@@ -57,6 +57,10 @@ class TestYaSpeller:
         result = checkYaSpeller("Картинка состояние отчета отправлен")
         assert not result, "Найдены ошибки"
 
+    def test_check_ya_speller_non_cyrillic_error(self):
+        result = checkYaSpeller("to be on not to be")
+        assert not result, "Найдены ошибки"
+
 
 class TestRunResult:
     def test_run(self, check_errors):

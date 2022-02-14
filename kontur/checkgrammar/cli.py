@@ -75,3 +75,7 @@ def cli(src, skip_pattern, dictionary, bsl, junit, output, dry_run):
     else:
         print("Нет ошибок", file=sys.stdout)
         sys.exit(0)
+
+
+if __name__ == "__main__":
+    cli(sys.argv[1:])
