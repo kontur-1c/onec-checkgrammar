@@ -1,4 +1,4 @@
-name: "mutant"
+name: "Mutants"
 on:
   push:
     paths:
@@ -31,7 +31,7 @@ jobs:
           retention-days: 1
       - name: Create report
         if: always()
-        run: mutmut junitxml --suspicious-policy=failure --untested-policy=skipped>>mutmut-junit.xml
+        run: mutmut junitxml --suspicious-policy=skipped --untested-policy=skipped>>mutmut-junit.xml
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v2
         if: always()
