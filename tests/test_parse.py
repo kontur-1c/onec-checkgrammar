@@ -107,6 +107,12 @@ class TestParseElements:
         for key in check_list:
             assert key in result
 
+    def test_parse_formatted_string(self):
+        form = parse.parseSrc("tests/fixture/epf_right/")
+        text = form["ОбработкаБезОшибок.Форма"]["ФорматированнаяСтрока.Заголовок"]
+        test = "1. google.com\n2. гугл.рф\n3. строковая константа"
+        assert text == test
+
 
 class TestParseFolders:
     def test_parse_src(self):

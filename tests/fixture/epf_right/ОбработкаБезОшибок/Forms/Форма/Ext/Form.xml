@@ -51,6 +51,18 @@
 							<ContextMenu name="НадписьКонтекстноеМеню" id="12"/>
 							<ExtendedTooltip name="НадписьРасширеннаяПодсказка" id="13"/>
 						</LabelDecoration>
+						<LabelDecoration name="ФорматированнаяСтрока" id="28">
+							<Title formatted="true">
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>1. &lt;link https://www.google.com/&gt;google.com
+&lt;/&gt;2. &lt;link https://гугл.рф&gt;гугл.рф
+&lt;/&gt;3. &lt;link СтроковаяКонстанта&gt;строковая константа&lt;/&gt;</v8:content>
+								</v8:item>
+							</Title>
+							<ContextMenu name="ФорматированнаяСтрокаКонтекстноеМеню" id="29"/>
+							<ExtendedTooltip name="ФорматированнаяСтрокаРасширеннаяПодсказка" id="30"/>
+						</LabelDecoration>
 						<PictureDecoration name="Картинка" id="14">
 							<Title formatted="false">
 								<v8:item>
