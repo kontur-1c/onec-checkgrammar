@@ -1,5 +1,6 @@
 import glob
 import os
+import re
 from typing import Dict, Union
 from xml.etree import ElementTree as Et
 
@@ -60,8 +61,11 @@ def getChildItems(obj: Et.Element) -> Dict[str, str]:
                 pass
             else:
                 content = getRuContent(title)
-                if content is not None:
-                    result[f"{name}.Заголовок"] = content
+                if content is None:
+                    continue
+                if title.attrib.get("formatted") == "true":
+                    content = re.sub("(\<.*?\>)", "", content)
+                result[f"{name}.Заголовок"] = content
 
         tooltip = element.find("logform:ToolTip", namespaces)
         if tooltip is not None:
