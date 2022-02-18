@@ -51,3 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Исправлено
 - ошибка yaspeller если проверяется строка без кириллицы
+
+## [0.5.0]
+
+### Добавлено
+- извлечение данных из Форматированной строки
