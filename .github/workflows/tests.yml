@@ -55,7 +55,7 @@ jobs:
       - name: Lint with mypy
         if: always()
         run: |
-          mypy --config-file mypy.ini --install-types --non-interactive kontur
+          mypy --config-file mypy.ini --non-interactive kontur
       - name: Lint with black
         if: always()
         run: |
