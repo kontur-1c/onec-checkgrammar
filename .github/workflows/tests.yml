@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
 
     steps:
     - uses: actions/checkout@v2
@@ -45,17 +45,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install flake8 mypy black isort
+          python -m pip install flake8 black isort
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
           flake8 kontur --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 kontur --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Lint with mypy
-        if: always()
-        run: |
-          mypy --config-file mypy.ini --install-types --non-interactive kontur
       - name: Lint with black
         if: always()
         run: |
