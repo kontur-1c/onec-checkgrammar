@@ -46,7 +46,7 @@ def getChildItems(obj: Et.Element) -> Dict[str, str]:
         return result
     for element in all_elements:
         name = element.attrib.get("name")
-        tag = element.tag[element.tag.find("}") + 1 :]
+        tag = element.tag[element.tag.find("}") + 1:]
         title = element.find("logform:Title", namespaces)
         if title is not None:
             # Проверим виден ли заголовок
