@@ -8,7 +8,7 @@ on:
 jobs:
   mutagen:
     name: Mutagen
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python 3.10
@@ -33,7 +33,7 @@ jobs:
         if: always()
         run: mutmut junitxml --suspicious-policy=skipped --untested-policy=skipped>>mutmut-junit.xml
       - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v2
+        uses: mikepenz/action-junit-report@v3
         if: always()
         with:
           report_paths: 'mutmut-junit.xml'
