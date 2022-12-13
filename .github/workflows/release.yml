@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: "3.10"
           architecture: x64
@@ -23,7 +23,7 @@ jobs:
         id: get_version
         env:
           GITHUB_REF: ${{ github.ref }}
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
         shell: bash
       - name: Build a binary wheel and a source tarball
         env:
@@ -39,7 +39,7 @@ jobs:
         id: create_release
         uses: ncipollo/release-action@v1
         with:
-          tag_name: v${{ steps.get_version.outputs.VERSION }}
+          tag: v${{ steps.get_version.outputs.VERSION }}
           release_name: Version v${{ steps.get_version.outputs.VERSION }}
           body: ${{ steps.changelog_reader.outputs.changes }}
           draft: true
@@ -47,6 +47,6 @@ jobs:
           artifacts: "dist/*"
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish distribution 📦 to PyPI
-        uses: pypa/gh-action-pypi-publish@master
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
