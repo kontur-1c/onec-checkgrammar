@@ -48,6 +48,10 @@ class TestYaSpeller:
         result = checkYaSpeller("Контрагент")
         assert not result, "Найдены ошибки"
 
+    def test_check_ya_speller_no_error2(self):
+        result = checkYaSpeller("Контрагент в Диадоке")
+        assert not result, "Найдены ошибки"
+
     def test_check_ya_speller_no_error_with_dict(self):
         result = checkYaSpeller("КоНрТаГеНт  ", tuple(["конртагент"]))
 

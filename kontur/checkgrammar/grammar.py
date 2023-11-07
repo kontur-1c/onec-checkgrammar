@@ -16,6 +16,10 @@ from kontur.checkgrammar import parse
 ya_speller = YandexSpeller(lang="ru", ignore_urls=True, ignore_latin=True)
 
 
+def all_lower(arr: List[str]) -> List[str]:
+    return [x.strip().lower() for x in arr]
+
+
 class Error:
     def __init__(self, form: str, element: str, text: str, errors: List[str]):
         self.form = form
@@ -49,7 +53,7 @@ def checkYaSpeller(text: str, our_dict=tuple()) -> List[GrammarError]:
         if (
             res["s"]
             and res["word"].lower() not in our_dict
-            and res["word"].lower() not in res["s"]
+            and res["word"].lower() not in all_lower(res["s"])
         ):  # Есть варианты замены
             result.append(GrammarError(res["word"], res["s"]))
 
@@ -58,7 +62,6 @@ def checkYaSpeller(text: str, our_dict=tuple()) -> List[GrammarError]:
 
 class GrammarCheck:
     def __init__(self):
-
         self._src = []
         self._dict = []
         self._result = None
@@ -73,7 +76,7 @@ class GrammarCheck:
         assert os.path.exists(full_path), f"Не найден словарь {full_path}"
 
         with open(path_to_dict, "r", encoding="utf-8") as f:
-            our_dict = [x.strip().lower() for x in f.readlines()]
+            our_dict = all_lower(f.readlines())
 
         self._dict += our_dict
 
@@ -175,7 +178,6 @@ class GrammarCheck:
         full_path = os.path.abspath(path_to_xml)
         ts = []
         for obj, details in self._result.items():
-
             test_cases = []
             for data in details:
                 test_case = junit_xml.TestCase(

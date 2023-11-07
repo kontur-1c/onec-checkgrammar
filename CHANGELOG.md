@@ -62,3 +62,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Исправлено
 
 - добавлена потерянная зависимость
+
+## [0.5.2]
+
+### Исправлено
+
+- ошибка сверки слов по регистру
