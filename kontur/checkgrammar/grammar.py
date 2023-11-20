@@ -13,7 +13,7 @@ from wasabi import Printer
 
 from kontur.checkgrammar import parse
 
-ya_speller = YandexSpeller(lang="ru", ignore_urls=True, ignore_latin=True)
+ya_speller = YandexSpeller(lang="ru", ignore_urls=True)
 
 
 def all_lower(arr: List[str]) -> List[str]:
