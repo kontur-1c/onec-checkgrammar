@@ -68,3 +68,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Исправлено
 
 - ошибка сверки слов по регистру
+
+## [0.5.4]
+
+### Исправлено
+
+- обновилась библиотека pyaspeller
